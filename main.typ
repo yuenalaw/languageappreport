@@ -314,7 +314,7 @@ Based on my survey, Duolingo was the most used language learning app, followed b
   ],
 )
 
-Compared to the interfaces of competing language apps, Duolingo's design is attractive due to its simple animations, clean and intuitive design and game-like features. Those who prefered Anki generally prioritised more their spaced-repetition system and its practicality, however the percentage of those who preferred Duolingo to Anki was 75% to 17%. The customisability aspect of Anki comes from how users can create their own cards, fill it with their own sentences, audio and words. When done well, this provides a optimized experience for long-term memory retention due to its multi-sensory capabilities.
+Compared to the interfaces of competing language apps, Duolingo's design is attractive due to its simple animations, clean and intuitive design and game-like features. Those who preferred Anki generally prioritised more their spaced-repetition system and its practicality, however the percentage of those who preferred Duolingo to Anki was 75% to 17%. The customisability aspect of Anki comes from how users can create their own cards, fill it with their own sentences, audio and words. When done well, this provides a optimized experience for long-term memory retention due to its multi-sensory capabilities.
 
 #figure(
   image("documents/survey1/Vocabulary-card-Anki-2.jpg", width:100%),
@@ -323,9 +323,9 @@ Compared to the interfaces of competing language apps, Duolingo's design is attr
   ]
 )
 
-However, Anki may be challenging for beginners due to its complexity @AnkiProsCons. It requires a long setup time to understand the interface if a user is to design their own review deck. Thus, many leaners opt to browse and find available pre-made decks online instead. However, the majority of the learning experience comes from creating your own flashcards, re-emphasized in a study aimed to promote active learning. The new strategy used is called the 'Flashcards-Plus' (FP) @FlashcardsPlus where, like traditional flashcards, students identify bold-faced terms from a textbook and write them on one side. Students then write the textbook definition on the other side. However, the FP strategy goes further; students write a definition for the same key word in their own words, and also generate a realistic example of the key term from their own lives that will increase retention.
+However, Anki may be challenging for beginners due to its complexity @AnkiProsCons. It requires a long setup time to understand the interface if a user is to design their own review deck. Thus, many leaners opt to browse and find available pre-made decks online instead. Yet, the majority of the learning experience comes from creating your own flashcards, re-emphasized in a study aimed to promote active learning. The new strategy used is called the 'Flashcards-Plus' (FP) @FlashcardsPlus where, like traditional flashcards, students identify bold-faced terms from a textbook and write them on one side. Students then write the textbook definition on the other side. However, the FP strategy goes further; students write a definition for the same key word in their own words, and also generate a realistic example of the key term from their own lives that will increase retention.
 
-The study concluded that students who used FP improved their exam performancd more than those who did not use the strategy. However, the downside of this study lies within the possibility of those being exposed to the FP strategy are already actively searching for ways to improve their own grades and study habits, rather than their own improved grades stemming from this new FP strategy alone.
+The study concluded that students who used FP improved their exam performance more than those who did not use the strategy. The downside of this study lies within the possibility of those being exposed to the FP strategy are already actively searching for ways to improve their own grades and study habits, rather than their own improved grades stemming from this new FP strategy alone.
 
 On the other hand, this study aligns with the idea of relating new learnings back to our own pre-existing knowledge.
 
@@ -434,7 +434,7 @@ Overall, the survey has highlighted the importance of:
 4. Listening exercises to improve pronunciation and speaking
 5. Interaction with native speakers
 
-While my app currently may not be able to achieve (5) Interaction with native speakers, further implementation of my app could include using chat bots such as Bing Chat or Chat-GPT to role-play as a language buddy.
+While my app currently may not be able to achieve (5), further implementation of my app could include using chat bots such as Bing Chat or Chat-GPT to role-play as a language buddy.
 
 #pagebreak()
 = Implementation (Backend)
@@ -511,7 +511,7 @@ Displayed beneath is an example JSON dictionary containing the 'keywords_img' as
 
 #set align(left)
 
-There is a one-to-many relationship from VideoDetails to UserSentence, as a video contains many sentences. This contains fields such as the sentence id which gets automatically incremented, the line number of this sentence in the context of the video, the id of the video that this sentence is related to, and finally the actual sentence, which again is a json containing the details of each word in the sentence, its translation, pronunciation, other similar sounding words and their POS.
+There is a one-to-many relationship from VideoDetails to UserSentence, as a video contains many sentences. This contains fields such as the sentence id which gets automatically incremented, the line number of this sentence in the context of the video, the id of the video that this sentence is related to, and finally the actual sentence, which again is a json containing the details of each word in the sentence, its translation, pronunciation, other similar sounding words and their part-of-speech (POS).
 
 #set align(center)
 
@@ -547,7 +547,7 @@ The Word model simply contains strings for the actual chinese characters (word),
 
 Finally, the UserWordReview model is utilised to store information for the spaced repetition algorithm. 
 
-This algorithm is inspired by Anki's own implementation, where a user ranks a certain flashcard's difficulty from 0-5, where 5 is a perfect response. In my implementation, this is calculated from how many of these exercises per word are wrong (seen later when discussing frontend, each word gets reviewed 5 times through 5 different exercises). A perfect 5/5 score would thus give a user a ranking of 5. The calculation also requires the number of previous repetitions of this flashcard, its previous ease factor (a floating point number generated by the last iteration of the spaced reptition algorithm to determine the number of days before the next review), and the previous interval that the user has seen the word. Additionally, I added a field called 'next_review' so that querying is easier. I simply have to query all reviews where next_review is less than or equal to today, which can then immediately be shown to the user.
+This algorithm is inspired by Anki's own implementation, where a user ranks a certain flashcard's difficulty from 0-5, where 5 is a perfect response. In my implementation, this is calculated from how many of these exercises per word are correct (seen later when discussing frontend, each word gets reviewed 5 times through 5 different exercises). A perfect 5/5 score would thus give a user a ranking of 5. The calculation also requires the number of previous repetitions of this flashcard, its previous ease factor (a floating point number generated by the last iteration of the spaced reptition algorithm to determine the number of days before the next review), and the previous interval that the user has seen the word. Additionally, I added a field called 'next_review' so that querying is easier. I simply have to query all reviews where next_review is less than or equal to today, which can then immediately be shown to the user.
 
 The algorithm spits out a new interval (the number of days for the next review), increments the number of repetitions, and calculates the new ease factor that has been adjusted based on how well the flashcard was remembered. All of this information gets sent to the server after every 'lesson' gets completed.
 
