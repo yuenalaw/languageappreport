@@ -94,7 +94,7 @@ The objectives of this project are stated as follows:
   text("Primary"),
   text("Transcripts can be generated from the app"),
   text("Primary"),
-  text("App can identify important sentences and phrases from the transcripts"),
+  text("Flashcards can be created from the transcripts"),
   text("Primary"),
   text("App can generate review questions relevant to the user"),
   text("Secondary"),
@@ -209,6 +209,38 @@ The next steps are to question end-users (language learners and teachers) and id
 #pagebreak()
 
 = Requirements specification
+
+#table(
+  columns: (auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  [*Functional Requirement*], [*Features required*], [*Priority*],
+  text("As a user, I want to obtain transcripts from interesting videos to study from."),
+  list( 
+    [Connect to the YouTube application programming interface (API).],
+    [Transcribe the YouTube video.],
+    [Translate the selected YouTube video.]
+  ),
+  text("Should"),
+  text("As a user, I want to identify certain sentences and words to make flashcards from."),
+  list(
+    [Incorporate NLP models to do word segmentation on the transcript.],
+    [Create a database to store the user created flashcards.],
+  ),
+  text("Should"),
+  text("As a user, I want to be able to review the flashcards in a spaced repetition system."),
+  list(
+    [Create a spaced repetition system where the tested vocabulary gets surfaced to the user at optimal times.],
+    [Allow the user to create their flashcard on the app.],
+  ),
+  text("Should"),
+  text("As a user, I want to be engaged with the app and have fun while learning."),
+  list( 
+    [Incorporate gamification into the app, such as streaks.],
+  ),
+  text("Could"),
+)
+
 
 #pagebreak()
 = Software engineering process
@@ -590,7 +622,7 @@ This is a GET request to the endpoint `http://projectvm05.cs.st-andrews.ac.uk:80
 
 A user will have to update the review information of a card when they have completed a game lesson. Each lesson consists of 5 words; instead of sending 5 network requets to the server, once per word, it would be better do utilise batching, minimising overhead.
 
-This is achieved by the server iterating through all of the words, obtaining their word_id, number of repeitions, the previous ease factor, the previous word interval and the quality of how well the user recalled the word, calculated by the frontend. Passing this to the function `update_user_word_review` in the ModelService class, these parameters are fed into the spaced repetition algorithm and each word obtains a new ease factor, number of repetitions, the interval for the next review as well as the next review date. Finally, this gets updated in the UserWordReview table.
+This is achieved by the server iterating through all of the words, obtaining their word_id, number of repetitions, the previous ease factor, the previous word interval and the quality of how well the user recalled the word, calculated by the frontend. Passing this to the function `update_user_word_review` in the ModelService class, these parameters are fed into the spaced repetition algorithm and each word obtains a new ease factor, number of repetitions, the interval for the next review as well as the next review date. Finally, this gets updated in the UserWordReview table.
 
 This endpoint is called via a POST request to `http://projectvm05.cs.st-andrews.ac.uk:8080/batchupdatereviews` with the fields:
 
