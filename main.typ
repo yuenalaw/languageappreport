@@ -303,7 +303,7 @@ To understand the language learning space, we must first identify the main pain 
 
 However, these questions gives a false sense that creating language apps is the only solution to learning a language. In fact there are many other resources available, such as using textbooks, attending in-person classes and more. Thus, the questions in the survey were not just limited to apps, but also learning methods students liked to use and why.
 
-The results can be seen below and also in Findings. Also note that the bullet points in the infographics are comments provided by the survey-takers, where they were given the opportunity to write more in detail about a certain opinion.
+The results can be seen below. Also note that the bullet points in the infographics are comments provided by the survey-takers, where they were given the opportunity to write more in detail about a certain opinion.
 
 Based on my survey, Duolingo was the most used language learning app, followed by Anki and Memrise. Students mentioned that the most useful functionalities were being able to listen to pronunciations, the gamification aspects (the ability to compete against friends through leaderboards and the short lessons which gives a feeling of progression), as well as spaced repetition. These findings match with my research seen in the Literature Review, but what was emphasised in the survey was the importance of User Experience (UX) and the app's User Interface (UI).
 
