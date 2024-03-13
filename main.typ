@@ -1203,7 +1203,13 @@ Students who were interested in further development of the app answered the ques
 
 == Evaluation against objectives
 
+The original set out objectives required creating a minimal viable product of a language app, having the ability to generate transcripts and flashcards from YouTube videos as well as review questions relevant to the user, and finally creating a user evaluation form to obtain user feedback at the end of the project.
 
+These objectives have been achieved, with the full-stack app being able to successfully query the YouTube API for a video with chinese captions, transcribe and translate it with word segmentation, and create flashcards for each word a user wants to learn. The creation of a flashcard has been extended based on user feedback and personal research to include multimedia aspects such as images, audio and animations. To achieve this, the app has the ability to query Google Images to obtain the top 3 images for a particular word, for the user to select as their flashcard image. Audio has been integrated through text-to-speech Flutter packages and animations have been integrated to show the stroke order of a character.
+
+The initial objective was for the app to generate review questions relevant to the user. This has been achieved through the creation of 5 exercises, which tests the user's understanding of the word through fill in the blank, matching the image, translating the sentence, recording their own voice to check their pronunciation and also testing their stroke order of characters by allowing users to write on the screen. Gamification techniques were also implemented to make the learning experience more fun, by the introduction of streaks and short game lessons where each lesson only tests a maximum of 5 words.
+
+Furthermore, the app has been evaluated by 37 students at the University of St Andrews, and the feedback has been positive, with 24.3% rating the app a 10/10. Throughout the building process, interviews were conducted with students and teachers to gather iterative feedback. This feedback has been used to improve the app, such as the introduction of a real-time listener to match the transcript to the video as it plays and other UI changes.
 
 == Critical appraisal
 
