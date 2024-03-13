@@ -17,8 +17,8 @@
   bibliography-file: "refs.bib",
 )
 
-// #import "@preview/wordometer:0.1.1": word-count, total-words
-// #show: word-count
+#import "@preview/wordometer:0.1.1": word-count, total-words
+#show: word-count
 
 #align(center + horizon, text(15pt)[
   *LANGUAGE LEARNING APP FOR INTERMEDIATE LEARNERS*
@@ -56,15 +56,7 @@ I declare that the material submitted for assessment is
 my own work except where credit is explicitly given to
 others by citation or acknowledgement. This work was
 performed during the current academic year except where
-otherwise stated.
-
-The main text of this project report is  words
-long, including project specification and plan.
-
-In submitting this project report to the University of St
-Andrews, I give permission for it to be made available
-for use in accordance with the regulations of the University
-Library. I also give permission for the title and abstract
+otherwise stated. The main text of this project report is #total-words words long, including project specification and plan. In submitting this project report to the University of St Andrews, I give permission for it to be made available for use in accordance with the regulations of the University Library. I also give permission for the title and abstract
 to be published and for copies of the report to be made and
 supplied at cost to any bona fide library or research worker,
 and to be made available on the World Wide Web. I
@@ -1087,11 +1079,101 @@ Traditional flashcards fall flat where audio cannot be integrated. Furthermore, 
 #pagebreak()
 = Evaluation
 
+== Student feedback
+
+This app was reviewed by 37 students at the University of St Andrews, coming from a variety of backgrounds. The process was as follows: students were given a quick demonstration of my app, and then were asked to fill out an online survey using Qualtrics. 
+
+The aim of the survey was to gather feedback on the app's usability, user interface (UI) and user satisfaction, as well as gather suggestions for future improvements. The first half of the survey was a series of questions to gather a student's previous language learning experience; the second half was a series of questions to gather feedback on the app.
+
+#figure(
+  image("documents/appreview/understandusers.png",width:120%),
+  caption: [
+    User previous language learning experience
+  ],
+)<languagelearningexperience>
+
+In @languagelearningexperience we can see that the majority (40.5%) of students have studied their foreign language for over 5 years, yet only 8.8% of the students ranked their language proficiency as 'fluent' (a 10/10). In this scale, 0 means that they cannot speak the language at all, 5 means they can hold a conversation with a stranger on the street, and 10 means they can understand complicated concepts in that language. The majority of the students surveyed ranked their proficiency as between 1-5, which is a beginner to intermediate level. This is the demographic that my app aims to target. Additionally, the students in question primarily used study techniques such as apps and watching media online.
+
+Next, the students were asked about their favourite language learning methods. 
+
+#figure(
+  image("documents/appreview/favmethods.png",width:120%),
+  caption: [
+    Favourite language learning methods
+  ],
+)<favouritemethods>
+
+The majority of students believed that conversing with native speakers was the most effective method of learning a language. This was followed by watching online media, such as YouTube videos, which aligns with the features of my app, such as the ability to watch YouTube videos and shadow the native speaker. Students who selected 'other' also mentioned listening to music in that foreign language, going to the country where the language is spoken and having motivation to learn that language. This goes hand-in-hand with the idea of going to the country where the language is spoken, as surrounding yourself in a culture with that language can keep motivation high. 
+
+Motivation also stems from being engaged and having fun when undergoing language learning. Therefore, I asked students to rank the methods of language learning based on engagement and fun. Watching media was ranked the highest. Textbooks, on the other hand, were ranked last, proving the point that students prefer to learn from relevant content and multimedia, rather than the static, mechanical teachings from a textbook.
+
+Surprisingly, learning through flashcards were ranked mainly in the 4th and 5th place, which is lower than I had expected. Despite the book 'Fluent Forever' @FF pushing flashcard learning as one of the most effective methods of learning, it is clear that students do not feel as engaged compared to other methods. To investigate further, I asked the students about how often they used flashcards in their language learning. 
+
+#figure(
+  image("documents/appreview/flashcards.png",width:120%),
+  caption: [
+    Flashcard usage
+  ],
+)<flashcardusage>
+
+@flashcardusage displays that the majority of students do not use flashcards at all, and if they do it is extremely rare (40.5% of the students selected 'very rarely/ few times a month'). Of the students that did use flashcards every day, they mentioned that they used Anki, a popular flashcard app. However, there has been much discourse on the engagement factor of Anki. Anki can be seen as quite a mechanical way of learning; students mentioned that Anki was 'boring'. The students who did enjoy Anki mainly mentioned its effectiveness rather than how fun it was.
+
+This is where my app comes in. My app aims to make flashcard learning more engaging and fun. The flashcard contains multimedia, such as images and sound, and students get tested through exercises utilising images, sound and animations, which is in contrast to Anki where students simply flip a card to see its translation. 
+
+However, to see the effectiveness of this approach, the second half of the survey was a series of questions to gather feedback on the app.
+
+#figure(
+  image("documents/appreview/valuablefeatures.png",width:120%),
+  caption: [
+    Favourite app features
+  ],
+)<appvaluablefeatures>
+
+Straight away we can see that students enjoyed the watching videos feature the most. Of those who commented, they mentioned how it was an 'innovative' and 'fresh' idea, and how it was the most 'engaging' feature if the app. Another student mentioned how the ability to have the transcription and translation at the same time meant it saved them time from having to look up words in the browser.
+
+Games were generally ranked second highest, getting comments such as 'I like games' and 'GAMES ARE COOL', re-emphasising the importance of making learning fun. Whilst students were ranking the app features, many students struggled to decide the order between games and the short lessons. Those who ranked short lessons (where each 'lesson' only tests 5 new words) before games mentioned how it was 'more realisitic for busy public users', explaining how much more practical it was.
+
+Finally, those who ranked creating flashcards first mentioned how easy it was and how they could 'click a word to add notes directly'. This is a feature that is not present in Anki, which gives a empty template to the user and expects them to fill in the information themselves. For students who are not aware of how to utilise flashcards and make it as engaging as possible, they may create a flashcard empty of multimedia and context, leaving no personal relation to the flashcard, and thus are less likely to remember it.
+
+It is also important to consider what would drive students away from using the app every day.
+
+#figure(
+  image("documents/appreview/appui.png",width:120%),
+  caption: [
+    Least favourite app features
+  ],
+)<appleastfavfeatures>
+
+The vast majority of students (43.2%) mentioned their own lack of motivation. They mentioned that 'outside the app, there aren't many reasons to use the language. A community of just people interested in the same language would be what I consider a primary source of motivation'. Similarly, another student wrote, 'I want to be able to see the progress of friends and other people!'. We can therefore see a relation between what motivates people - a community of people learning the same language. 
+
+Those who selected 'other' described their fears of being busy and falling behind. Another student mentioned how they did not want to overuse their brain. This is a common fear amongst students, and is why the app is designed to have short, 5-minute lessons. However, the app does not currently have a feature to support students who are falling behind. Due to the spaced-repetition algorithm, students who fall behind will have to review more words the next day, which can be overwhelming.
+
+However, I wanted to investigate how students found the user interface of the app. This can be seen in the pie chart in @appleastfavfeatures (2nd chart). Most students discussed how the search functionality was laborious, as the students would need to know the YouTube ID of the video in order to download it. Initially, this was implemented in the case students could not type in chinese and therefore could not search up the video. When this was brought up, students mentioned how they would rather search in english and have the app translate the search for them. 
+
+One interesting comment was how 'as a beginner, it is very hard to know what to even search in the first place'. Since we are searching YouTube videos, the user would need to have a background in watching chinese YouTube to know what interests them. If random videos are shown to them, they may not be interested in the content and thus not be motivated to study from it. This would be a good feature to add in the future, where the app can suggest videos to the user based on their interests. As stated from another student, 'it would be very unlikely that I would know or be interested in YouTubers that speak in a language I am trying to learn. It would be nice if the app recommended videos related to the type of content I would be interested in, at least for starters to get me familiar with that area of YouTube'. Students also mentioned having 'a feature showing recommended search terms would be helpful because as a language learner you do not even know what to search. For example maybe we can search "cooking videos" in English and it would bring up the equivalent in Chinese.' Additionally, students mentioned they would like to see custom videos, instead of being limited to YouTube.
+
+Students who mentioned the 'watching YouTube video' feature as their least favourite interface feature mentioned how although they could see the segmentation of the words, there is currently no way to identify what the different colours mean. It would be better, they suggested, to categorise the words into nouns, verbs, adjectives etc. They also found the layout of all the previously watched videos to be cluttered and unorganised, suggesting playlists to organise by categories, ratings, themes or dates. Some mentioned a bookmarking feature for videos they struggled with, so they can come back to it later. Others wanted better ways to track their progress of videos such as their watch time and how many words or flashcards they have made on that video, linking back to the idea of progress tracking increasing motivation. Lastly, when watching the video, students recommended having a feature that allowed automatic pausing of the video at every caption change to allow them to read the transcript at their own pace.
+
+Regarding 'flashcard creation', many students pointed out that the stroke order animation could be difficult to see at times, due to the colour clash with the dark background. Furthermore, the app currently does not allow students to see all their previously made flashcards as the idea was to re-surface the flashcard at optimal times based on a spaced repetition system through game-based learning. However, students mentioned how they would like to see all their flashcards in one place, as well as the ability to edit and delete them. In a previous iteration of the MVP, I had initially allowed for students to take their own images for the flashcards. This was later changed to query Google Images API and obtain the top 3 images for students to select from. It would be beneficial to have options for both of these features, as some students mentioned how they would like to take their own images for the flashcards.
+
+Lastly, the 'game learning' feature was regarded generally highly. Students identified its similarities to Duolingo and expressed how they would like to see more Duolingo-like features such as earning experience points and introducing characters to the games. Some students wanted to see game aspects that leaned more towards competing with friends, such as every 'accomplishment can give you foot soldiers - attack your friends!' In a similar vein, students wanted time-based challenges to bring in a competition aspect to it. There were some discrepencies with this feedback, however, as others stressed they would rather have simple, manual flashcards rather than all the game features. Thus, a later iteration of the app would be a balance between these two, where the user can choose to have a more game-like experience or a more traditional flashcard experience.
+
+In conclusion, the app was rated very highly, with all students rating the app a 6 or higher, and 24.3% rating the app a 10/10.
+
+#figure(
+  image("documents/appreview/appsatis.png",width:120%),
+  caption: [
+    App Rating
+  ],
+)<apprating>
+
+Students who were interested in further development of the app answered the question 'Are there any future features you would like to see on the app?' with ideas such as a continuous assessment of the user's vocablary. This was interesting, as the student who mentioned this came from a background of language courses and did not use many apps. They discussed how schools would have small tests every week, and how this would be beneficial to have. Many other students' ideas fell into the idea of social-networking, where they could make friends and have chat rooms to practice their language, create their own user profiles, have ranked leaderboard that compare your progress with friends. Additionally, it was mentioned from a few others to have more game-features such as having more characters and perhaps virtual reality (VR) integration.
+
 == Critical appraisal
 
 == Future work
 
-- Social connection (right now app only works for one person)
+Currently, the app is designed for one user. However, the app could be expanded to include a social networking aspect, as mentioned by the students. This would make the app more engaging and motivating, as we have discovered that a community of people learning the same language can help motivate people. It would also be interesting to incorporate large language models (LLMs) through the avatar of an in-game character to help with students who do not have access to a network of people speaking that foreign language. Future iterations of the app could bring in new game-features that help with building community, such as leaderboards and clans, to make the app more fun and boost motivation. Finally, the app could be expanded to include more languages, as the app is currently only designed for mandarin. Some students who took the survey mentioned how they would love to see the app in the foreign language they are currently studying.
 
 #pagebreak()
 = Conclusion
