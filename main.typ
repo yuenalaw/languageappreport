@@ -81,7 +81,7 @@ The play store is oversaturated with language learning apps. What makes this any
 
 Many of the apps in the market are costly and tend to tailor their content around beginner language learners. Currently, I am on the journey of studying Mandarin Chinese, but I am struggling to find resources to aid my learning. More specifically, there is a large amount of beginner-friendly content, but not enough for intermediate learners. The content topics are generic and are not personalised to my interests.
 
-I therefore propose an app solution based on language learning research that seeks to integrate best language learning practices for intermediate learners using YouTube. Users can create flashcards from new vocabulary found from these YouTube videos and through a spaced repetition (SRS) system, be able to review these words in short, game-based exercises. These exercises encompass reading, writing and speaking and utilises multimedia from Google images. Additionally, research will encompass my own personal investigations through survey and interviews, research papers and analysis on the success of language apps such as Duolingo.
+I therefore propose an app solution based on language learning research that seeks to integrate best language learning practices for intermediate learners using YouTube. Users can create flashcards from new vocabulary found from these YouTube videos and through a spaced repetition (SRS) system, be able to review these words through review questions provided by the app. Additionally, research will encompass my own personal investigations through survey and interviews, research papers and analysis on the success of language apps such as Duolingo.
 
 The objectives of this project are stated as follows:
 
