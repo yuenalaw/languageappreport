@@ -1201,14 +1201,18 @@ In conclusion, the app was rated very highly, with all students rating the app a
 
 Students who were interested in further development of the app answered the question 'Are there any future features you would like to see on the app?' with ideas such as a continuous assessment of the user's vocablary. This was interesting, as the student who mentioned this came from a background of language courses and did not use many apps. They discussed how schools would have small tests every week, and how this would be beneficial to have. Many other students' ideas fell into the idea of social-networking, where they could make friends and have chat rooms to practice their language, create their own user profiles, have ranked leaderboard that compare your progress with friends. Additionally, it was mentioned from a few others to have more game-features such as having more characters and perhaps virtual reality (VR) integration.
 
+== Evaluation against objectives
+
+
+
 == Critical appraisal
-
-== Future work
-
-Currently, the app is designed for one user. However, the app could be expanded to include a social networking aspect, as mentioned by the students. This would make the app more engaging and motivating, as we have discovered that a community of people learning the same language can help motivate people. It would also be interesting to incorporate large language models (LLMs) through the avatar of an in-game character to help with students who do not have access to a network of people speaking that foreign language. Future iterations of the app could bring in new game-features that help with building community, such as leaderboards and clans, to make the app more fun and boost motivation. Finally, the app could be expanded to include more languages, as the app is currently only designed for mandarin. Some students who took the survey mentioned how they would love to see the app in the foreign language they are currently studying.
 
 #pagebreak()
 = Conclusion
+
+In conclusion, my app successfully achieves and exceeds all set out objectives. Through conducting personal research, interviews with language learners and more, I have been able to create an app that utilises effective language learning techniques to create a product that is engaging, fun and useful, as seen by the results from the final survey. The initial app has been improved through constant iterations from interviews with students and teachers, and the final product consists of features such as YouTube transcript syncing, obtaining flashcard images from Google Images, and a game-based learning system, on top of the original plan of obtaining a video's transcript and creating flashcards to review from. 
+
+Currently, the app is designed for one user. However, the app could be expanded to include a social networking aspect, as mentioned by the students. This would make the app more engaging and motivating, as we have discovered that a community of people learning the same language can help motivate people. It would also be interesting to incorporate large language models (LLMs) through the avatar of an in-game character to help with students who do not have access to a network of people speaking that foreign language. Future iterations of the app could bring in new game-features that help with building community, such as leaderboards and clans, to make the app more fun and boost motivation. Finally, the app could be expanded to include more languages, as the app is currently only designed for mandarin. Some students who took the survey mentioned how they would love to see the app in the foreign language they are currently studying.
 
 #pagebreak()
 = Appendix
