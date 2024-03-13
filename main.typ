@@ -1223,6 +1223,19 @@ Currently, the app is designed for one user. However, the app could be expanded 
 #pagebreak()
 = Appendix
 
+== User manual 
+
+The app's server is currently hosted on a virtual machine at the University of St Andrews, thus the app will only serve requests if the Flutter client is connected to the University's Eduroam. The app is currently not available on any stores, but can be run locally by downloading the github repository and running the Flutter client. The github repository is private and can be accessed by contacting the author. 
+
+To download the Flutter client when the repository is accessed, run the following: 
+
+```
+cd frontend/workspace/flutterapp
+flutter pub get 
+flutter run
+```
+== Other
+
 #figure(
   (image("documents/swe/progress1.png",width:120%), 
   image("documents/swe/progress2.png",width:120%),
