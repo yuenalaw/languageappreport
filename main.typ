@@ -20,18 +20,30 @@
 #import "@preview/wordometer:0.1.1": word-count, total-words
 #show: word-count
 
-#align(center + horizon, text(15pt)[
+#align(center + top, text(15pt)[
   *LANGUAGE LEARNING APP FOR INTERMEDIATE LEARNERS*
+])
 
-  Yue Ning Law
+#align(center + top, text(12pt)[
+  *Yue Ning Law*
+
+  210002926
+])
+
+#align(center + horizon)[
+  #image("documents/uni/uniemblem.png", width: 70%)
+]
+
+#align(center + bottom, text(12pt)[
+  Supervisor: Angela Miguel
 ])
 
 #align(center + bottom)[
-*University of St Andrews*
+School of Computer Science
 
-Supervisor: Angela Miguel
+University of St Andrews
 
-Date submitted: 22/05/24
+22nd March 2024
 ]
 
 #pagebreak()
