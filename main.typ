@@ -34,15 +34,14 @@ Supervisor: Angela Miguel
 Date submitted: 22/05/24
 ]
 
-// #set par(justify: true)
-
-
-
-// to do
-// requirements spec, evaluation + critical appraisal, conclusions
-// appendix (how to test, user manual)
 #pagebreak()
+
+#set align(center + horizon)
+= Dedication 
+To my grandma, mum and dad.
+
 #set align(left + horizon)
+#pagebreak()
 
 = Abstract
 
@@ -1213,6 +1212,24 @@ Furthermore, the app has been evaluated by 37 students at the University of St A
 
 == Critical appraisal
 
+My app's uniqueness draws from the utilisation of YouTube videos and context-based learning, which is not seen in many language apps today. Combined with ideas from Duolingo, Rosetta Stone and Anki, the app is a mix of multimedia (Rosetta Stone), spaced-repetition (Anki) and game-based learning (Duolingo). 
+
+The strengths of my app comes from the incorporation of visuals through YouTube videos, images from Google to create flashcards and chinese character stroke animations. Audio is also incorporated through videos and text-to-speech packages, facilitating better retention and recall. Furthermore, the spaced repetition algorithm optimises effective learning and the game-based learning increases a user's motivation and engagement.
+
+However, there are many areas which the app falls short. As the app encompasses a mixture of elements from the different apps, it is not as strong in certain aspects as the individual apps. For example, the spaced-repetition algorithm may not be as optimised as Anki's implementation, and there is not a lot of user freedom for them to create their own flashcard. Anki, for example, contains features for learners to hide certain parts of an image and do labelling. 
+
+For multimedia learning, the app cannot ensure quality of the YouTube videos. As there are no professional chinese speakers working on the app, the app cannot ensure that all of the NLP segmentation is correct. Certain words may not be segmented correctly and there is currently no way for the user to correct this. 
+
+Regarding game-based learning, the app's user interface is not as polished as Duolingo's. The app does not have social networking aspects such as leaderboards and features to compete with friends. The app also does not have a feature to track the user's progress, such as how far through the video you have watched, or how many flashcards you have created, which is a big factor of motivation for certain users. Duolingo is also known for its characters and stories, which my app does not have. 
+
+On the other hand, the app is tailored specifically to language learners, compared to Anki, which is a general-purpose flashcard app. Anki does not prompt the user to create flashcards with audio, images and other multimedia aspects, which has proven to increase retention. Furthermore, the app allows users to quickly create flashcards from YouTube videos rather than from scratch, which speeds up the process of creating flashcards. At the same time, it allows users to create flashcards from authentic contexts, preparing them for more real-life situations. 
+
+Combined with the short lessons for microlearning, the app is more practical for busy learners, who may not have time to sit down and study for long periods of time.
+
+Since the users can choose which YouTube video to study from, the app can be tailored to the user's interests, which is an advantage to Duolingo and Rosetta Stone where the content is pre-determined. 
+
+Potentially, the app could incorporate more social features such as virtual study groups and leaderboards, as well as more game-based learning features such as characters and stories. These features would also fit with the app's branding of learning off authentic content, as users can share their own real-life stories as in-game characters.
+
 #pagebreak()
 = Conclusion
 
@@ -1222,6 +1239,175 @@ Currently, the app is designed for one user. However, the app could be expanded 
 
 #pagebreak()
 = Appendix
+
+== Tests 
+
+Tests were split into 3 different types: backend unit tests that tested the API calls and their logic, tests that ensures the Flutter frontend handles API responses correctly, and finally end-to-end (E2E) tests that tested the complete application flow, which involves users interacting with the app.
+
+*Unit tests*
+
+The API tests were achieved using Postman, an API platform for building and using APIs. These tests were run on localhost and the logs were checked via DockerHub. 
+
+#table( 
+  columns: (auto, auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  [*Test*], [*Expected*], [*Result*], [*Pass*],
+  text("Test that the API call to get the YouTube transcript is successful with a valid YouTube ID. (Use endpoint '/vid'). The YouTube video has chinese captions"), 
+  text("The server logs should show the YouTube transcript"),
+  text("Server successfully logged the chinese transcript"),
+  text("Pass"),
+
+  text("Test that word segmentation works on the YouTube transcript. (Use endpoint '/vid')"),
+  text("The server logs should show the segmented words"),
+  text("Server successfully logged the segmented words"),
+  text("Pass"),
+
+  text("Test that the segmented words can successfully obtain their pronunciation information, similar word information and translation information. (Use endpoint '/vid')"),
+  text("The server logs should show the pronunciation, similar words and translation of the segmented words"),
+  text("Server successfully logged the pronunciation, similar words and translation of the segmented words"),
+  text("Pass"), 
+
+  text("Test that the YouTube transcript, when processed as above, is saved onto the database. (Use endpoint '/vid' to submit a valid YouTube video, then check the database contains this through endpoint /getlesson/<videoid>)"),
+  text("The database should contain the YouTube transcript"),
+  text("Database successfully contains the YouTube transcript"),
+  text("Pass"),
+
+  text("Test that the TextRazor API call is successful and obtains the lesson keywords for that transcript. Also seen from endpoint /vid"),
+  text("The server logs should show the lesson keywords"),
+  text("Server successfully logged the lesson keywords"),
+  text("Pass"),
+
+  text("Test the PyUnsplash API can obtain image urls for the lesson keywords. Also seen from endpoint /vid"),
+  text("The server logs should show the image urls"),
+  text("Server successfully logged the image urls"),
+  text("Pass"),
+
+)
+
+In the Flutter frontend, the following unit tests used MockHttpClient to test the logic without actually hitting the real endpoints. This is seen under the 'tests' folder in the Flutter app.
+
+#table( 
+  columns: (auto, auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  [*Test*], [*Expected*], [*Result*], [*Pass*],
+  text("Test gets all videos from the server"),
+  text("When the server is called, the server should return a list of videos with response 200"),
+  text("Server returns a list of videos and has response 200"),
+  text("Pass"),
+
+  text("Test that the app can send a POST request to request a YouTube video"),
+  text("When a YouTube video is requested, the server should return a response 200"),
+  text("Server returns a response 200"),
+  text("Pass"),
+
+  text("Test that a 404 error is thrown if a YouTube video is not found"),
+  text("When a YouTube video is not found, the server should return a response 404"),
+  text("Server returns a response 404 for a particular YouTube video request"),
+  text("Pass"),
+
+  text("Test that data for a specific video is returned when a GET is sent"),
+  text("When a GET request is sent for a specific video, the server should return a response 200 with the video data"),
+  text("Server returns a response 200 with the video data"),
+  text("Pass"),
+
+  text("Test that the app can send a POST request to create a flashcard"),
+  text("When a flashcard is created given the correct inputs, the server should return a response 200"),
+  text("Server returns a response 200"),
+  text("Pass"),
+
+  text("Test that the app can successfully send a POST request to update a flashcard"),
+  text("When a flashcard is updated given the updated note and image url, the server should return a response 200"),
+  text("Server returns a response 200"),
+  text("Pass"),
+
+  text("Test that the app can query all words to be reviewed today through a GET request"),
+  text("When a GET request is sent to the server, the server should return a response 200 with the words to be reviewed today"),
+  text("Server returns a response 200 with the words to be reviewed today"),
+  text("Pass"),
+
+  text("Test that the app can obtain the streak today from a GET request"),
+  text("When a GET request is sent to the server, the server should return a response 200 with the streak today"),
+  text("Server returns a response 200 with the streak today"),
+  text("Pass"),
+)
+
+*End-to-end tests*
+
+These end-to-end tasks test a user interacting with the app.
+
+#table( 
+  columns: (auto, auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  [*Test*], [*Expected*], [*Result*], [*Pass*],
+
+  text("Test that app only shows YouTube video if chinese captions are available"),
+  text("When the YouTube id of an english video is placed, app shows no results"),
+  text("App shows no results"),
+  text("Pass"),
+
+  text("Test that app only shows YouTube video if chinese captions are available"),
+  text("When the YouTube id of a chinese video is placed, app shows the video"),
+  text("App shows the video"),
+  text("Pass"),
+
+  text("Test that the app can successfully show the transcript of the video"),
+  text("When the YouTube id of a chinese video is placed, app shows the transcript"),
+  text("App shows the transcript"),
+  text("Pass"),
+
+  text("Test that the app can successfully shows the segmented words of each phrase in the transcript"),
+  text("When a video is selected, the words are segmented through the use of different background colours"),
+  text("App shows the segmented words"),
+  text("Pass"),
+
+  text("Test that the transcript page displays all relevant information"),
+  text("When a video is clicked, the lesson keywords and their images are shown, as well as the rest of the transcript"),
+  text("App shows the lesson keywords and their images, as well as the rest of the transcript"),
+  text("Pass"),
+
+  text("Test that the app allows for the creation of flashcards for each word in the transcript"),
+  text("When a word is clicked, the app allows the user to create a flashcard by displaying a page with the word stroke animation, its pronunciation, translation and similar words"),
+  text("App shows the flashcard creation page"),
+  text("Pass"),
+
+  text("Test that the app can successfully query the top 3 images from Google Images for a word when creating a transcript"),
+  text("When a word is clicked and a user wants to choose a flashcard image from Google Images, the app shows the top 3 images"),
+  text("App shows the top 3 images"),
+  text("Pass"),
+
+  text("Test that the app can add a day to a streak when a lesson is finished"),
+  text("Starting from a streak of 0, when a lesson is finished, the streak should show 1"),
+  text("Streak shows 1 when a lesson is finished"),
+  text("Pass"),
+
+  text("Test that the app can determine whether a flashcard must be created or be updated"),
+  text("When a flashcard is created, the app's button should turn to 'Update'"),
+  text("Button turns to 'Update' when a flashcard is created"),
+  text("Pass"),
+
+  text("Test that the flashcard can update its image and notes"),
+  text("When a flashcard is updated, the image and notes should change"),
+  text("Image and notes change when a flashcard is updated"),
+  text("Pass"),
+
+  text("Test that all 5 exercises are surfaced to the user in a game lesson"),
+  text("In a game, all 5 exercises should be shown to the user for a specific word"),
+  text("All 5 exercises are shown to the user"),
+  text("Pass"),
+
+  text("Test that the YouTube transcript works in real-time and different times of the video can be jumped to"),
+  text("When the user clicks on a phrase, the video jumps. The transcript also changes in real-time"),
+  text("The video jumps and the transcript changes in real-time"),
+  text("Pass"),
+
+  text("Test that the app successfully shows the word at correct intervals based on spaced-repetition"),
+  text("When a word is added, the word gets re-surfaced at different days based on the spaced-repetition algorithm"), 
+  text("The word gets re-surfaced at different days based on the spaced-repetition algorithm"),
+  text("Pass"),
+)
 
 == User manual 
 
