@@ -5,15 +5,6 @@
 #import "template.typ": *
 #show: ams-article.with(
   title: [],
-  // authors: (
-  //   (
-  //     name: "Yue Ning Law",
-  //     department: [Department of Computer Science],
-  //     organization: [University of St Andrews],
-  //     location: [St Andrews],
-  //     email: "ynl1@st-andrews.ac.uk",
-  //   ),
-  // ),
   bibliography-file: "refs.bib",
 )
 
@@ -57,7 +48,11 @@ To my grandma, mum and dad.
 
 = Abstract
 
-Many existing language apps today cater to beginners, leaving intermediate learners struggling to find effective and personalised resources. This project aims to identify the most important aspects of language learning and create a full-stack application that leverages YouTube content, flashcards, multimedia, spaced-repetition and game-based learning to aid intermediate learners. Personal investigations such as surveys and interviews will be conducted to complement existing research. The app will have a focus on Mandarin Chinese.
+This project presents the design, development and evaluation of a full-stack language application curated for intermediate Chinese learners. 
+
+Research was conducted through surveys and interviews with language learners and teachers to identify the most important aspects of language learning. The final result contains an app that uses natural language processing to segment video transcripts from YouTube into vocabulary words for students to study. Students are able to watch YouTube videos in real-time with the transcripts and their translations, create multimedia flashcards enhanced with images from Google, personal notes, audio pronunciations and stroke order animations, and play short, 5-minute games to re-inforce learning based on a spaced-repetition algorithm. These games include exercises such as matching words to images, testing speech pronunciation, translating sentences, fill-in-the-blank sentences and stroke order practice.
+
+Lastly, the app was evaluated by 37 students which indicated that the app was engaging, fun and effective, with 24.3% of students rating the app a 10/10. 
 
 #pagebreak()
 
@@ -88,11 +83,11 @@ retain the copyright in this work.
 
 = Introduction
 
-The play store is oversaturated with language learning apps. What makes this any different?
+Many existing language apps today cater to beginners, leaving intermediate learners struggling to find effective and personalised resources. This project aims to identify the most important aspects of language learning and create a full-stack application that leverages YouTube content, flashcards, multimedia, spaced-repetition and game-based learning to aid intermediate learners. Personal investigations such as surveys and interviews will be conducted to complement existing research.
 
-Many of the apps in the market are costly and tend to tailor their content around beginner language learners. Currently, I am on the journey of studying Mandarin Chinese, but I am struggling to find resources to aid my learning. More specifically, there is a large amount of beginner-friendly content, but not enough for intermediate learners. The content topics are generic and are not personalised to my interests.
+Currently, I am on the journey of studying Mandarin Chinese, but I am struggling to find resources to aid my learning. More specifically, there is a large amount of beginner-friendly content, but not enough for intermediate learners. The content topics are generic and are not personalised to my interests. Through asking other language learners, I have found that many of them face the same issue.
 
-I therefore propose an app solution based on language learning research that seeks to integrate best language learning practices for intermediate learners using YouTube. Users can create flashcards from new vocabulary found from these YouTube videos and through a spaced repetition (SRS) system, be able to review these words through review questions provided by the app. Additionally, research will encompass my own personal investigations through survey and interviews, research papers and analysis on the success of language apps such as Duolingo.
+I therefore propose an app solution based on language learning research that seeks to integrate best language learning practices for intermediate learners of Mandarin Chinese using YouTube. Users can create flashcards from new vocabulary found from these YouTube videos and through a spaced repetition (SRS) system, be able to review these words through review questions provided by the app. Additionally, research will encompass my own personal investigations through survey and interviews, research papers and analysis on the success of language apps such as Duolingo.
 
 The objectives of this project are stated as follows:
 
@@ -115,143 +110,24 @@ The objectives of this project are stated as follows:
 
 #pagebreak()
 
-= Context survey
+= Ethics
 
-It has been argued that languages did not necessarily evolve from speech, but from the innate human instinct of communication. At first, humans did not have words, but they expressed themselves with body gestures and hand movements. As they innovated, creating fire and inventing tools, only then did they begin to communicate with their mouths, and thus along came the need for words @OEL. Language therefore emerged from mimicking others, which we can see from studying the brains of monkeys; the same areas of their brains light up when watching another monkey perform a set of grasping movements @MMN. Interestingly, the brain region for monkeys mimicking each other is the same brain region that lights up for human language. 
+Regarding YouTube’s developer policies @youtubepolicies it is important to consider both ethical and legal aspects, including copyright issues.
+I will ensure that:
++ Content queried from YouTube is used only for language learning purposes, and the app will not misuse the content in any way.
++ Content queried from YouTube will be explicitly stated, as the video will be embedded into the app.
++ To protect the rights of content creators, the app will clearly credit the original creators of the video.
++ Videos will stop being shown if a content creator does not want their video shown on the app.
++ My app will transform the copyrighted material by incorporating it into a language learning context.
++ My app will not allow videos to be downloaded or be temporarily stored. The video will be transformed into transcripts designed just for language learning.
++ My app will only use publicly available content through the YouTube API.
 
-What we can distil from this research is that we learn languages from copying and observing each other. By just observing another’s movements, our own brain can help us infer their goals and intentions. This therefore gives us meaning behind their movements. If we relate this to language, by listening to a lot of content in that language and watching their body movements, we can unconsciously infer the meaning of the words. 
+This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, shown in the Appendix (@PI), which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
 
-Language learning can thus be summarised into 4 important steps @HTL: 
-
-1. Seek relevance
-2. Obtain the content’s basic meaning
-3. Focus on only what you can understand
-4. Build it into memory
-
-For example, you may be fluent in English, but if you were thrown into a PhD study of physics and did not come from a physics background, you would also be lost in its terminology. The content has no personal relation to you; to build this knowledge into memory, you would first need to filter out the principles of the content and understand the basics. After that, you would have to work out how you can fit this new content into your existing knowledge.
-
-Our brains work unconsciously and are constantly seeking out new patterns. In order to learn, our brains categorise the content into something we can group, then abstract it away such that we can form relationships. The methodology works because similar words are located close to each other in your brain. To do this, we need to constantly be seeing and using this content in different contexts (a method called “interleaving”) and creating analogies @ILL. The idea of analogies links back to how we move this knowledge into our long-term memory, which is by creating relevance around this content.
-
-If we take this through the lens of computer science, we can understand this idea of abstraction through how we code. If we have new words such as “car”, “motorbike”, “truck”, we can categorise these into a class called “vehicle”. As we build up these classes and abstract them away, we can more easily draw high-level relationships between them.
-
-How can we apply this to achieving fluency? Fluency occurs when words fit together automatically. We do not necessarily have to think about the next word in a sentence, because our brain has already found the patterns and intuitively knows what words should come next. 
-
-Gabriel Wyner, the author of Fluent Forever @FF, discusses how we can actively use language learning principles and apply them. Above, I discussed the four main principles of language learning. To apply them, here are the four main steps:
-
-1. Pronunciation
-2. Get the most frequent words to learn
-3. Use comprehensible input
-4. Output
-
-With pronunciation, it is important to learn the rhythm of the words and the flow of the words. At the same time, we should be training our ears and our mouth to learn how to differentiate similar sounding words, and how to actually pronounce these words with our mouths. By getting the flow of the language, this applies to principle (2) of “obtaining the basic meaning”. Here, we are understanding the gist of the language.
-
-The next step is getting the most frequent words to learn. This helps with principle (1) and (3) - seeking relevance and focusing learning on what you can understand. Before we read a whole chunk of text, we need to create anchors in our brains to latch on to. We have to give our brain context before learning new things, which can let the brain draw connections between ideas and the new words. It is also important that learners do not get bogged down by the nitty gritty of the language; they should instead try and understand the context and overall meaning of the text. This principle is used in most textbooks; students are given the most important keywords to learn before the article, helping them prioritise certain words.
-
-The third is using comprehensible input, relating to principle (1) (seeking relevance) and (4) (building it into memory). By choosing content that we like, we can draw connections in our brains. Wyner talks about how when we get new words, we can make it comprehensible by turning it into stories. We have previously discussed how analogies (and therefore stories) help turn new information into long-term memory. Wyner stresses how comprehensible input does not mean simply translating the words to understand it. He emphasises how we should directly link stories to images. For example, to learn the phrase “she is”, we can use the phrase “she is a doctor” and have a picture of a woman in a doctor suit. 
-
-Fourth, is output. Outputting is important because this is where we use the new words in different contexts. We can start to use the words in sentences that have a personal relation to us, reinforcing the words in our minds. Playing with the words in our minds also lets us deepen connections with words in that context, helping us draw links between words and start speaking fluently. 
-
-To further investigate the importance of creating analogies in our brain, a study @APHT explored how analogical processes in human thinking and learning improved a person’s learning relational retrieval and transfer. 
-
-The paper focuses on mapping, especially. Analogical mapping is the process of establishing a structural alignment between two represented situations and then projecting inferences @MOAL. In other words, two situations or concepts are aligned to find commonalities and make inferences between them. Interestingly, this theory is not new at all; it was studied in a paper published in 1890 @TCM, which aimed to create a Structure-Mapping Engine (SME), a cognitive simulation for analogical matching. There are two important aspects; support, which measures how much an inference is based on the analogy you are making (where more support from the analogy is better) and extrapolation, measuring how much your inferences goes beyond what the analogy directly provides.
-
-Only after mapping does ‘directionality’ emerge, where the meat of the understanding takes place as we explore the analogy further. An example given from paper @MOAL is the word “jail”. A similar word could be “prison”. An analogy could be “job”. Thus, if the learner was learning “jail”, instead of just showing them the word countless times, we can ask them to generate metaphors with the word and talk about their experiences or feelings with that word. 
-
-A paper on structural alignment @SAIC takes this further, exploring why analogies are so effective for memorisation. As we have discussed, our mental representations are hierarchical (we prioritise certain things) and are made up of categories with relations to each other. By comparing two ideas, there is a structural alignment to find a maximal structurally consistent match between representations. The system favours interpretations that preserve a maximal connected related structure; in other words, we remember new information easier if we can draw many links to another idea. Taking this idea into language learning, we can see this in similar sentence structures, or the negation of certain words. For example, “I like” and “I don’t like” are different, but we can remember them due to their alignable differences. Antonyms also work the same way; “up” is related to “down” even though they have opposite meanings. 
-
-Intermediate learners can benefit from analogical thinking, because they have a larger vocabulary range and a better understanding of grammar, enabling them to draw better connections. A current issue intermediate learners face is the lack of speaking and listening practice students get in a classroom setting @PIL. However, it is through listening where learners can create analogies as they see the words in more contexts, and it is through speaking where learners can develop their own self-confidence in that language. The self-confidence ties in with pronunciation, as students are worried that they sound too foreign. 
-
-The most common methods of language learning taught in schools are usually through reading. To investigate the effectiveness of reading in the target language, I explored a paper on the effect of exposure frequency on vocabulary acquisition @EEF. The research confirms that reading does serve as a significant source of vocabulary development, but in quite a surprising manner. Although the vocabulary growth is modest, it highlights that reading creates cumulative knowledge, and has a long-term positive impact on adult vocabulary growth. What is paramount is the exposure of the new word in different contexts, which allows the learners to infer word meanings. We can link this back to the idea of how our brains remember better if they work through finding patterns themselves, which is why learning languages through pure translating back to your native language is not the most effective.
-
-If reading only contributes to a modest impact on vocabulary, what are some of the strategies that have been proven effective for vocabulary retention? As already discussed, learning vocabulary is enhanced when we encounter words in context. Flashcards, mnemonics and translations are very common approaches for this, but to prove this assumption, we should assess vocabulary learning through immersion. VocabulARy, a study on learning vocabulary through augmented reality (AR) @AR, is an AR application for vocabulary learning that visually annotates objects in AR, in the user’s surroundings, with the corresponding words. The study took two groups, one that used the VocabulARy prototype and another that had an alternate AR system which did not show any additional visualisation of the keyword. Showing visualisations outperformed the other group in short-term retention, mental effort and task-completion time, and also scored significantly higher in delayed recall and learning efficiency.
-
-To evaluate this methodology, one paper addresses the development of an AR system called Arigato for language learning @EOAG. Its aim was to provide insights into the effectiveness of adaptive guidance in an AR environment for language learning, considering the following key metrics: engagement, mental effort and learning performance. The system allowed for four levels of variation in the type of guidance given to the learner; fixed amount, adaptive amount, fixed associations and adaptive associations. In the fixed condition, the learners receive a predetermined level of guidance that does not change based on their performance. For adaptive conditions, the amount of guidance adjusts based on the participants’ performance. In association conditions, participants are presented with 3D AR models of objects corresponding to the vocabulary being learned.
-
-The group that performed the best was the adaptive associations in all fields; behavioural engagement, cognitive engagement and learning performance. Participants were more interested in the adaptive-associations condition, re-emphasizing that mnemonics motivates learners to be more creative and enjoy using their minds more productively. 
-
-How can we apply what we have learnt with speaking? As previously discovered, speaking is the biggest priority for intermediate learners. 
-
-Speaking is known for its difficulty due to message conceptualization and articulation @ISS. They studied the strategies students took when practising speaking; metacognitive strategies were the most frequently employed throughout all stages of the task, which included task preparation, execution and follow-up. Participants used extensive planning to structure their arguments and to select appropriate vocabulary, then continuously monitored their performance by assessing their grammar, vocabulary and pronunciation. After, they completed self-evaluation. What we can gauge is that a good speaker actually comes from the planning and thought behind their sentences and arguments, rather than just constantly outputting speech. Bound with this, is the constant assessment of their own performance.
-
-With this in mind, we can assess the current language learning apps on the market. In particular, I will be discussing the big three language learning apps, Babbel, Duolingo and Rosetta Stone.
-
-Babbel focuses on achieving fluency through immersion of real-life dialogues @Babbel. It uses the idea of how a native learner would learn, by teaching vocabulary and grammar through practical dialogue examples in conversation. It guides the brain to connect the dots passively by learning new information based on the dialogue context. At the same time, it trains the learner’s pronunciation skills. It also emphasises the use of a spaced-repetition system, where you revisit the words in different contexts, spaced out over time.
-
-Cognitive psychology has repeatedly shown the benefits of using short repetition practicies in order to put new knowledge into long term memory @EQSDP. Ebbinghaus stated that 'with any considerable number of repetitions a suitable distribution of them over a space of time is decidedly more advantageous than the massing of them at a single time'. The umbrella term for this phenomenon is the 'distributed practice effect' or 'spacing effect'.
-
-Very early on, Ebbinghaus conducted experiments on himself to determine how to minimize the amount of time it took to relearn a set of material. He discovered that spacing the study of simple verbal material across several days rather than all in one day resulted in fewer relearning trials. From this initial study, many other studies branched from learning words, sentences and text passanges.
-
-In Glenberg's experiments, he discovered that increasing the amount of time between recall sessions benefitted retention to a point; after this point is reached, the additional intervals lead to a poorer retention. In other words, learners should start from shorter interstudy intervals until a certain interval, and maintain this.
-
-Duolingo is a game-based learning app that stresses the importance of “learning-by-doing” through interactive lessons @Duolingo. Similarly to Babbel, it uses the idea of your brain picking up patterns passively, and thus Duolingo does not teach grammar rules. It instead pushes learners to figure out the conjugation rules by themselves. By utilising AI, Duolingo adapts lessons to individuals, where the AI model tracks and adjusts the order and difficulty of exercises. The topics chosen to teach are based on school and institutions standards. However, Duolingo is most known for its high engagement, due to its bite-sized lessons and gamification streaks, helping learners to stay motivated.
-
-Finally, Rosetta Stone relies on dynamic immersion @Rosetta. The idea is to use human senses in order to move new words into long-term memory. For example, learners are not given translations, but are instead encouraged to learn the words through the pictures. To achieve grammar, Rosetta Stone gives a few examples of a grammatical concept, then the words the learner should focus on gets highlighted. To achieve speech, they offer services that allow learners to read aloud, and as they do so, their pronunciation gets corrected.
-
-Each language app has their own unique advantages and disadvantages. The use of forcing your brain to draw their own connections to recognise different patterns aligns with the research I have conducted above, and building content based on personal relevance (as Babbel and Duolingo do) has been proven to help retain information. Babbel’s spaced repetition system is also very effective, especially as it reminds you of the words in a different context every time. A common misconception of learning is to constantly repeat information with flashcards, however not only is this boring, the brain starts to recognise the cards and trick itself into thinking it has the card remembered, when it actually has not. The spaced repetition system of Babbel means that the cards for the same word are not always the same, which forces the brain to recognise the words in different contexts. 
-
-Duolingo’s strength comes with the gamification aspect. Its bite-sized lessons take less than 5 minutes to do, and learners can undergo “quests” with their friends, allowing them to push each other and support each other in learning. It also makes them feel more accountable when they miss their lessons, because their progress can be shown to their friends. As a personal user of Duolingo, I like how each exercise brings in new vocab to learn, but at the same time is very easy to complete. Furthermore, Duolingo consists of badge systems and rewards, in the hopes that students become more motivated and engaged in their content. Students should be intrinsically motivated to learn @IOG (where the desire to learn comes from the student, rather than from external factors such as parental pressure), as this leads to better information retainment. However, a substantial body of research suggests that the way we attempt to increase intrinsic motivation should be cautioned @EOG, because tangible rewards (such as badges) can shift a student’s motivation from intrinsic to extrinsic. What they instead conclude is that gamification should be used for the fast feedback to the students. 
-
-Rosetta Stone’s strength comes from the fact it uses sensory input. Different languages may contain words that do not exist in the learner’s primary language. Thus, there is no direct translation. Therefore, images are incredibly useful for this, because it strips away the intermediary step of having your brain translate to a different language domain, where sometimes the word does not exist. Its stress on pronunciation and having a direct feedback loop is also useful in achieving fluency, because many learners struggle with pronunciation the most. Learning new languages requires you to train new mouth muscles, muscles that may not be used in the learner’s primary language.
-
-When designing a language app, we can also stretch beyond what other language apps do and take a look at social media. Social media is addictive; among the 7.91 billion people as of 2022, the average time individuals spent using the internet was 6h 58 minutes per day, with an average use of social media platforms of 2h and 27 mins @GOR. What sets social media apart is the personalization aspect, human connection and the fact people are free to exchange ideas which build up on top of each other. We can see this through the most popular apps of January 2022, which are TikTok, Instagram, Facebook and Whatsapp, whose basic goal is to enable users to share and create content with each other. 
-
-The idea of social media is simple: help humans establish relationships @PPAS. As establishing relationships interferes with necessary life activities such as sleep, nutrition and work, its overuse can be seen as any other addiction as it can dominate a person’s life. To establish relationships, people need to be able to connect and engage with others through the sharing of experiences and ideas. In fact, the definition of social media by Merriam-Webster states social media is a “form of electronic communication (such as websites for social networking and microblogging) through which users create online communities to share information, ideas, personal messages, and other content (such as videos)”. 
-
-Drawing aspects of social media with language learning is an interesting field to explore; social media gives opportunities for students to understand more about other cultures through videos and blogs. On the other hand, there are many criticisms of using social media, one of the main reasons being addiction. In the context of language learning though, a study in Algeria investigated the effect of social media in writing @IESM. In particular, a discussion was drawn between writing formally and informally, where on social media 90% highlighted their use of slang words and abbreviations. When asked about the reasons for informality in writing, the students gave reasons ranging from the fast and easy to use nature, as well as it being helpful in being able to express themselves. It gave them more freedom in writing in contrast to the formal way that obliged them to follow strict rules. The paper concluded that social media did indeed have an overall negative impact on the way students write, as the relaxing environment of social media encouraged students to write through abbreviations, symbols and slang words. In a social media context, this writing style is accepted, but inappropriate from an academic perspective. 
-
-The paper recommends integrating reading sessions within the lesson, where learners choose their favourite books, summarise it, and create a discussion with it. He argues that with this method, the students will be able to expand their knowledge and also see how the language is formed and how different words are combined together to make meaning. However, I would criticise this paper in that this paper was written through the lens of an academic context. There are many goals within the field of language learning; not everyone learns for the sake of academic writing. Social media’s strength lies in getting quick ideas across and sparking conversation. Social media’s personalisation aspect also means learners can choose what and who they want to learn from; there is plentiful content for those in the academic space, and others in entertainment.
-
-Another paper focuses on microlearning and shows that gamification, infographics, videos, apps and social media may all be leveraged to provide this @MLT. Microlearning allows lessons to be given in a short length of time and can be accessible at any time and from anywhere. It further explores how microlearning can increase student comprehension and retention, especially when lessons are broken down into digestible pieces. In the modern day, TikTok (a platform for short videos) are extremely easy to remember because of their short, effective nature, where all important information is concisely condensed into a few seconds. This is a great example of microlearning; the only downside is that microlearning is not effective when dealing with a narrow, intricate and complicated issue requiring an in-depth discussion. 
-
-An example of microlearning is Duolingo. Microlearning is often known as gamification, where the critical difference lies with learning goals being masked as game-like activities. The gamification encourages students to participate more in the learning activities by providing them more enjoyable approaches. Duolingo is one of the most popular language apps, but how effective is it? We can back up Duolingo through a study done by Fang @ASCE , which looks at English learning. The study begins with emphasising that despite the exponential growth of knowledge and information with the internet, the traditional 'classroom + textbook' learning mode has failed to satisfy people’s needs of seeking knowledge. The new micro-learning approach has become popular among college students due to their ability to use mobile handheld devices, such as a mobile phone, and micro-learning concentrates on brief and independent messages. College students are therefore provided with the information they need anytime.
-
-Using handheld devices also has its benefits. In language learning, mobile devices are great for quickly looking up new words, translating sentences or even finding answers to questions. It also provides a convenient means to access videos, music and content that can be applicable to language learning. With the billions of content available online, learners can also be exposed to different cultures and languages whenever they want. In learning, there is a ‘forgetting curve’ @FC which states that the process of forgetting gets slower and slower over time, as long as you keep repeating the content at timed intervals. Thus, having access to content anytime means that learners can harness the power of repetition and utilise it to their advantage. This is in contrast to the learning environment in schools, where students have to wait each week for a lesson to review their knowledge. 
-
-A case study we can use is X (previously Twitter), which is a microblogging platform. A paper looked especially at using X to foster foreign language learning @FFLL, aiming to gain insights about learners’ perceptions of the use of X in language learning and how they feel about tweeting as an extracurricular activity throughout four weeks. X helps educators and learners benefit because the platform enhances student collaboration and interaction. Students can engage in meaningful communication and get immediate feedback, which as discussed previously, can help students learn more effectively. 
-
-Vygotsky, a plurilingual speaker, underlined the importance of connection in people’s perception of events. He developed a social constructivist theory, where he believed community plays a central role in the process of “making meaning” @VTCD. Education is not merely a cognitive basis for improvement, but also a socio-cultural activity. Learning takes place in a social context, where knowledge is acquired from interacting with each other and environments. Thus we introduce contextual variability, where cues such as mood, environment and mental images are encoded alongisde items as they are learned. This links back with our previous research where we discovered the importance of seeing new vocabuarly in different contexts and how the words can be used.
-
-Many of the language learning applications today are focused on beginners, whose aim is to just familiarise themselves with the language. This means there is more emphasis on creating content around general, surface-level topics. Basic vocabulary and grammar structures are not enough to make students confident in speaking, which we have discovered comes from being able to plan out sentences with careful vocabulary and grammar choices (which depends on having a more specific vocabulary range and an expansive grammar bank), as well as a fast, personalised feedback loop which does not come from traditional class lessons, as many students only see their teachers once a week. 
-
-The next steps are to question end-users (language learners and teachers) and identify their biggest frustrations with language learning, and to design an app that will address these. The aim is to provide a solution to intermediate chinese learners, implementing features that will be impactful and supportive to each student in their language learning journey.
+The signed ethical approval document can also be seen in the Appendix (@ethicsapproval).
 
 #pagebreak()
 
-= Requirements specification
-
-#table(
-  columns: (auto, auto, auto),
-  inset: 10pt,
-  align: horizon,
-  [*Functional Requirement*], [*Features required*], [*Priority*],
-  text("As a user, I want to obtain transcripts from interesting videos to study from."),
-  list( 
-    [Connect to the YouTube application programming interface (API).],
-    [Transcribe the YouTube video.],
-    [Translate the selected YouTube video.]
-  ),
-  text("Should"),
-  text("As a user, I want to identify certain sentences and words to make flashcards from."),
-  list(
-    [Incorporate NLP models to do word segmentation on the transcript.],
-    [Create a database to store the user created flashcards.],
-  ),
-  text("Should"),
-  text("As a user, I want to be able to review the flashcards in a spaced repetition system."),
-  list(
-    [Create a spaced repetition system where the tested vocabulary gets surfaced to the user at optimal times.],
-    [Allow the user to create their flashcard on the app.],
-  ),
-  text("Should"),
-  text("As a user, I want to be engaged with the app and have fun while learning."),
-  list( 
-    [Incorporate gamification into the app, such as streaks.],
-  ),
-  text("Could"),
-)
-
-
-#pagebreak()
 = Software engineering process
 
 Agile is a methodology for the continuous delivery of valuable software. As the end-goal is to create a full-stack application with iterative feedback from interviews throughout the building process, Agile is useful for producing many working iterations of a software solution quickly and also involving a wide range of stakeholders at all phases of the development process @ieeeagile.
@@ -289,23 +165,108 @@ The reason why weeks 1-8 were blank were because these weeks were used to unders
 You can read the progress log in Appendix @progress. 
 
 #pagebreak()
-= Ethics
+= Context survey
 
-Regarding YouTube’s developer policies @youtubepolicies it is important to consider both ethical and legal aspects, including copyright issues.
-I will ensure that:
-+ Content queried from YouTube is used only for language learning purposes, and the app will not misuse the content in any way.
-+ Content queried from YouTube will be explicitly stated, as the video will be embedded into the app.
-+ To protect the rights of content creators, the app will clearly credit the original creators of the video.
-+ Videos will stop being shown if a content creator does not want their video shown on the app.
-+ My app will transform the copyrighted material by incorporating it into a language learning context.
-+ My app will not allow videos to be downloaded or be temporarily stored. The video will be transformed into transcripts designed just for language learning.
-+ My app will only use publicly available content through the YouTube API.
+It has been argued that languages did not necessarily evolve from speech, but from the innate human instinct of communication. At first, humans did not have words, but they expressed themselves with body gestures and hand movements. As they innovated, creating fire and inventing tools, only then did they begin to communicate with their mouths, and thus along came the need for words @OEL. Language therefore emerged from mimicking others, which we can see from studying the brains of monkeys; the same areas of their brains light up when watching another monkey perform a set of grasping movements @MMN. Interestingly, the brain region for monkeys mimicking each other is the same brain region that lights up for human language. 
 
-This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, shown in the Appendix (@PI), which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
+What we can distil from this research is that we learn languages from copying and observing each other. By just observing another’s movements, our own brain can help us infer their goals and intentions. This therefore gives us meaning behind their movements. If we relate this to language, by listening to a lot of content in that language and watching their body movements, we can unconsciously infer the meaning of the words. 
 
-The signed ethical approval document can also be seen in the Appendix (@ethicsapproval).
+Language learning can thus be summarised into 4 important steps @HTL: 
+
+1. Seek relevance
+2. Obtain the content’s basic meaning
+3. Focus on only what you can understand
+4. Build it into memory
+
+For example, you may be fluent in English, but if you were thrown into a PhD study of physics and did not come from a physics background, you would also be lost in its terminology. The content has no personal relation to you; to build this knowledge into memory, you would first need to filter out the principles of the content and understand the basics. After that, you would have to work out how you can fit this new content into your existing knowledge.
+
+Our brains work unconsciously and are constantly seeking out new patterns. In order to learn, our brains categorise the content into something we can group, then abstract it away such that we can form relationships. The methodology works because similar words are located close to each other in your brain. To do this, we need to constantly be seeing and using this content in different contexts (a method called 'interleaving') and creating analogies @ILL. The idea of analogies links back to how we move this knowledge into our long-term memory, which is by creating relevance around this content.
+
+If we take this through the lens of computer science, we can understand this idea of abstraction through how we code. If we have new words such as 'car', 'motorbike', 'truck', we can categorise these into a class called 'vehicle'. As we build up these classes and abstract them away, we can more easily draw high-level relationships between them.
+
+How can we apply this to achieving fluency? Fluency occurs when words fit together automatically. We do not necessarily have to think about the next word in a sentence, because our brain has already found the patterns and intuitively knows what words should come next. 
+
+Gabriel Wyner, the author of Fluent Forever @FF, discusses how we can actively use language learning principles and apply them. Above, I discussed the four main principles of language learning. To apply them, here are the four main steps:
+
+1. Pronunciation
+2. Get the most frequent words to learn
+3. Use comprehensible input
+4. Output
+
+With pronunciation, it is important to learn the rhythm of the words and the flow of the words. At the same time, we should be training our ears and our mouth to learn how to differentiate similar sounding words, and how to actually pronounce these words with our mouths. By getting the flow of the language, this applies to principle (2) of 'obtaining the basic meaning'. Here, we are understanding the gist of the language.
+
+The next step is getting the most frequent words to learn. This helps with principle (1) and (3) - seeking relevance and focusing learning on what you can understand. Before we read a whole chunk of text, we need to create anchors in our brains to latch on to. We have to give our brain context before learning new things, which can let the brain draw connections between ideas and the new words. It is also important that learners do not get bogged down by the nitty gritty of the language; they should instead try and understand the context and overall meaning of the text. This principle is used in most textbooks; students are given the most important keywords to learn before the article, helping them prioritise certain words.
+
+The third is using comprehensible input, relating to principle (1) (seeking relevance) and (4) (building it into memory). By choosing content that we like, we can draw connections in our brains. Wyner talks about how when we get new words, we can make it comprehensible by turning it into stories. We have previously discussed how analogies (and therefore stories) help turn new information into long-term memory. Wyner stresses how comprehensible input does not mean simply translating the words to understand it. He emphasises how we should directly link stories to images. For example, to learn the phrase 'she is', we can use the phrase 'she is a doctor' and have a picture of a woman in a doctor suit. 
+
+Fourth, is output. Outputting is important because this is where we use the new words in different contexts. We can start to use the words in sentences that have a personal relation to us, reinforcing the words in our minds. Playing with the words in our minds also lets us deepen connections with words in that context, helping us draw links between words and start speaking fluently. 
+
+To further investigate the importance of creating analogies in our brain, a study @APHT explored how analogical processes in human thinking and learning improved a person’s learning relational retrieval and transfer. 
+
+The paper focuses on mapping, especially. Analogical mapping is the process of establishing a structural alignment between two represented situations and then projecting inferences @MOAL. In other words, two situations or concepts are aligned to find commonalities and make inferences between them. Interestingly, this theory is not new at all; it was studied in a paper published in 1890 @TCM, which aimed to create a Structure-Mapping Engine (SME), a cognitive simulation for analogical matching. There are two important aspects; support, which measures how much an inference is based on the analogy you are making (where more support from the analogy is better) and extrapolation, measuring how much your inferences goes beyond what the analogy directly provides.
+
+Only after mapping does ‘directionality’ emerge, where the meat of the understanding takes place as we explore the analogy further. An example given from paper @MOAL is the word 'jail'. A similar word could be 'prison'. An analogy could be 'job'. Thus, if the learner was learning 'jail', instead of just showing them the word countless times, we can ask them to generate metaphors with the word and talk about their experiences or feelings with that word. 
+
+A paper on structural alignment @SAIC takes this further, exploring why analogies are so effective for memorisation. As we have discussed, our mental representations are hierarchical (we prioritise certain things) and are made up of categories with relations to each other. By comparing two ideas, there is a structural alignment to find a maximal structurally consistent match between representations. The system favours interpretations that preserve a maximal connected related structure; in other words, we remember new information easier if we can draw many links to another idea. Taking this idea into language learning, we can see this in similar sentence structures, or the negation of certain words. For example, 'I like' and 'I don’t like' are different, but we can remember them due to their alignable differences. Antonyms also work the same way; 'up' is related to 'down' even though they have opposite meanings. 
+
+Intermediate learners can benefit from analogical thinking, because they have a larger vocabulary range and a better understanding of grammar, enabling them to draw better connections. A current issue intermediate learners face is the lack of speaking and listening practice students get in a classroom setting @PIL. However, it is through listening where learners can create analogies as they see the words in more contexts, and it is through speaking where learners can develop their own self-confidence in that language. The self-confidence ties in with pronunciation, as students are worried that they sound too foreign. 
+
+The most common methods of language learning taught in schools are usually through reading. To investigate the effectiveness of reading in the target language, I explored a paper on the effect of exposure frequency on vocabulary acquisition @EEF. The research confirms that reading does serve as a significant source of vocabulary development, but in quite a surprising manner. Although the vocabulary growth is modest, it highlights that reading creates cumulative knowledge, and has a long-term positive impact on adult vocabulary growth. What is paramount is the exposure of the new word in different contexts, which allows the learners to infer word meanings. We can link this back to the idea of how our brains remember better if they work through finding patterns themselves, which is why learning languages through pure translating back to your native language is not the most effective.
+
+If reading only contributes to a modest impact on vocabulary, what are some of the strategies that have been proven effective for vocabulary retention? As already discussed, learning vocabulary is enhanced when we encounter words in context. Flashcards, mnemonics and translations are very common approaches for this, but to prove this assumption, we should assess vocabulary learning through immersion. VocabulARy, a study on learning vocabulary through augmented reality (AR) @AR, is an AR application for vocabulary learning that visually annotates objects in AR, in the user’s surroundings, with the corresponding words. The study took two groups, one that used the VocabulARy prototype and another that had an alternate AR system which did not show any additional visualisation of the keyword. Showing visualisations outperformed the other group in short-term retention, mental effort and task-completion time, and also scored significantly higher in delayed recall and learning efficiency.
+
+To evaluate this methodology, one paper addresses the development of an AR system called Arigato for language learning @EOAG. Its aim was to provide insights into the effectiveness of adaptive guidance in an AR environment for language learning, considering the following key metrics: engagement, mental effort and learning performance. The system allowed for four levels of variation in the type of guidance given to the learner; fixed amount, adaptive amount, fixed associations and adaptive associations. In the fixed condition, the learners receive a predetermined level of guidance that does not change based on their performance. For adaptive conditions, the amount of guidance adjusts based on the participants’ performance. In association conditions, participants are presented with 3D AR models of objects corresponding to the vocabulary being learned.
+
+The group that performed the best was the adaptive associations in all fields; behavioural engagement, cognitive engagement and learning performance. Participants were more interested in the adaptive-associations condition, re-emphasizing that mnemonics motivates learners to be more creative and enjoy using their minds more productively. 
+
+How can we apply what we have learnt with speaking? As previously discovered, speaking is the biggest priority for intermediate learners. 
+
+Speaking is known for its difficulty due to message conceptualization and articulation @ISS. They studied the strategies students took when practising speaking; metacognitive strategies were the most frequently employed throughout all stages of the task, which included task preparation, execution and follow-up. Participants used extensive planning to structure their arguments and to select appropriate vocabulary, then continuously monitored their performance by assessing their grammar, vocabulary and pronunciation. After, they completed self-evaluation. What we can gauge is that a good speaker actually comes from the planning and thought behind their sentences and arguments, rather than just constantly outputting speech. Bound with this, is the constant assessment of their own performance.
+
+With this in mind, we can assess the current language learning apps on the market. In particular, I will be discussing the big three language learning apps, Babbel, Duolingo and Rosetta Stone.
+
+Babbel focuses on achieving fluency through immersion of real-life dialogues @Babbel. It uses the idea of how a native learner would learn, by teaching vocabulary and grammar through practical dialogue examples in conversation. It guides the brain to connect the dots passively by learning new information based on the dialogue context. At the same time, it trains the learner’s pronunciation skills. It also emphasises the use of a spaced-repetition system, where you revisit the words in different contexts, spaced out over time.
+
+Cognitive psychology has repeatedly shown the benefits of using short repetition practicies in order to put new knowledge into long term memory @EQSDP. Ebbinghaus stated that 'with any considerable number of repetitions a suitable distribution of them over a space of time is decidedly more advantageous than the massing of them at a single time'. The umbrella term for this phenomenon is the 'distributed practice effect' or 'spacing effect'.
+
+Very early on, Ebbinghaus conducted experiments on himself to determine how to minimize the amount of time it took to relearn a set of material. He discovered that spacing the study of simple verbal material across several days rather than all in one day resulted in fewer relearning trials. From this initial study, many other studies branched from learning words, sentences and text passanges.
+
+In Glenberg's experiments, he discovered that increasing the amount of time between recall sessions benefitted retention to a point; after this point is reached, the additional intervals lead to a poorer retention. In other words, learners should start from shorter interstudy intervals until a certain interval, and maintain this.
+
+Duolingo is a game-based learning app that stresses the importance of 'learning-by-doing' through interactive lessons @Duolingo. Similarly to Babbel, it uses the idea of your brain picking up patterns passively, and thus Duolingo does not teach grammar rules. It instead pushes learners to figure out the conjugation rules by themselves. By utilising AI, Duolingo adapts lessons to individuals, where the AI model tracks and adjusts the order and difficulty of exercises. The topics chosen to teach are based on school and institutions standards. However, Duolingo is most known for its high engagement, due to its bite-sized lessons and gamification streaks, helping learners to stay motivated.
+
+Finally, Rosetta Stone relies on dynamic immersion @Rosetta. The idea is to use human senses in order to move new words into long-term memory. For example, learners are not given translations, but are instead encouraged to learn the words through the pictures. To achieve grammar, Rosetta Stone gives a few examples of a grammatical concept, then the words the learner should focus on gets highlighted. To achieve speech, they offer services that allow learners to read aloud, and as they do so, their pronunciation gets corrected.
+
+Each language app has their own unique advantages and disadvantages. The use of forcing your brain to draw their own connections to recognise different patterns aligns with the research I have conducted above, and building content based on personal relevance (as Babbel and Duolingo do) has been proven to help retain information. Babbel’s spaced repetition system is also very effective, especially as it reminds you of the words in a different context every time. A common misconception of learning is to constantly repeat information with flashcards, however not only is this boring, the brain starts to recognise the cards and trick itself into thinking it has the card remembered, when it actually has not. The spaced repetition system of Babbel means that the cards for the same word are not always the same, which forces the brain to recognise the words in different contexts. 
+
+Duolingo’s strength comes with the gamification aspect. Its bite-sized lessons take less than 5 minutes to do, and learners can undergo 'quests' with their friends, allowing them to push each other and support each other in learning. It also makes them feel more accountable when they miss their lessons, because their progress can be shown to their friends. As a personal user of Duolingo, I like how each exercise brings in new vocab to learn, but at the same time is very easy to complete. Furthermore, Duolingo consists of badge systems and rewards, in the hopes that students become more motivated and engaged in their content. Students should be intrinsically motivated to learn @IOG (where the desire to learn comes from the student, rather than from external factors such as parental pressure), as this leads to better information retainment. However, a substantial body of research suggests that the way we attempt to increase intrinsic motivation should be cautioned @EOG, because tangible rewards (such as badges) can shift a student’s motivation from intrinsic to extrinsic. What they instead conclude is that gamification should be used for the fast feedback to the students. 
+
+Rosetta Stone’s strength comes from the fact it uses sensory input. Different languages may contain words that do not exist in the learner’s primary language. Thus, there is no direct translation. Therefore, images are incredibly useful for this, because it strips away the intermediary step of having your brain translate to a different language domain, where sometimes the word does not exist. Its stress on pronunciation and having a direct feedback loop is also useful in achieving fluency, because many learners struggle with pronunciation the most. Learning new languages requires you to train new mouth muscles, muscles that may not be used in the learner’s primary language.
+
+When designing a language app, we can also stretch beyond what other language apps do and take a look at social media. Social media is addictive; among the 7.91 billion people as of 2022, the average time individuals spent using the internet was 6h 58 minutes per day, with an average use of social media platforms of 2h and 27 mins @GOR. What sets social media apart is the personalization aspect, human connection and the fact people are free to exchange ideas which build up on top of each other. We can see this through the most popular apps of January 2022, which are TikTok, Instagram, Facebook and Whatsapp, whose basic goal is to enable users to share and create content with each other. 
+
+The idea of social media is simple: help humans establish relationships @PPAS. As establishing relationships interferes with necessary life activities such as sleep, nutrition and work, its overuse can be seen as any other addiction as it can dominate a person’s life. To establish relationships, people need to be able to connect and engage with others through the sharing of experiences and ideas. In fact, the definition of social media by Merriam-Webster states social media is a 'form of electronic communication (such as websites for social networking and microblogging) through which users create online communities to share information, ideas, personal messages, and other content (such as videos)'. 
+
+Drawing aspects of social media with language learning is an interesting field to explore; social media gives opportunities for students to understand more about other cultures through videos and blogs. On the other hand, there are many criticisms of using social media, one of the main reasons being addiction. In the context of language learning though, a study in Algeria investigated the effect of social media in writing @IESM. In particular, a discussion was drawn between writing formally and informally, where on social media 90% highlighted their use of slang words and abbreviations. When asked about the reasons for informality in writing, the students gave reasons ranging from the fast and easy to use nature, as well as it being helpful in being able to express themselves. It gave them more freedom in writing in contrast to the formal way that obliged them to follow strict rules. The paper concluded that social media did indeed have an overall negative impact on the way students write, as the relaxing environment of social media encouraged students to write through abbreviations, symbols and slang words. In a social media context, this writing style is accepted, but inappropriate from an academic perspective. 
+
+The paper recommends integrating reading sessions within the lesson, where learners choose their favourite books, summarise it, and create a discussion with it. He argues that with this method, the students will be able to expand their knowledge and also see how the language is formed and how different words are combined together to make meaning. However, I would criticise this paper in that this paper was written through the lens of an academic context. There are many goals within the field of language learning; not everyone learns for the sake of academic writing. Social media’s strength lies in getting quick ideas across and sparking conversation. Social media’s personalisation aspect also means learners can choose what and who they want to learn from; there is plentiful content for those in the academic space, and others in entertainment.
+
+Another paper focuses on microlearning and shows that gamification, infographics, videos, apps and social media may all be leveraged to provide this @MLT. Microlearning allows lessons to be given in a short length of time and can be accessible at any time and from anywhere. It further explores how microlearning can increase student comprehension and retention, especially when lessons are broken down into digestible pieces. In the modern day, TikTok (a platform for short videos) are extremely easy to remember because of their short, effective nature, where all important information is concisely condensed into a few seconds. This is a great example of microlearning; the only downside is that microlearning is not effective when dealing with a narrow, intricate and complicated issue requiring an in-depth discussion. 
+
+An example of microlearning is Duolingo. Microlearning is often known as gamification, where the critical difference lies with learning goals being masked as game-like activities. The gamification encourages students to participate more in the learning activities by providing them more enjoyable approaches. Duolingo is one of the most popular language apps, but how effective is it? We can back up Duolingo through a study done by Fang @ASCE , which looks at English learning. The study begins with emphasising that despite the exponential growth of knowledge and information with the internet, the traditional 'classroom + textbook' learning mode has failed to satisfy people’s needs of seeking knowledge. The new micro-learning approach has become popular among college students due to their ability to use mobile handheld devices, such as a mobile phone, and micro-learning concentrates on brief and independent messages. College students are therefore provided with the information they need anytime.
+
+Using handheld devices also has its benefits. In language learning, mobile devices are great for quickly looking up new words, translating sentences or even finding answers to questions. It also provides a convenient means to access videos, music and content that can be applicable to language learning. With the billions of content available online, learners can also be exposed to different cultures and languages whenever they want. In learning, there is a ‘forgetting curve’ @FC which states that the process of forgetting gets slower and slower over time, as long as you keep repeating the content at timed intervals. Thus, having access to content anytime means that learners can harness the power of repetition and utilise it to their advantage. This is in contrast to the learning environment in schools, where students have to wait each week for a lesson to review their knowledge. 
+
+A case study we can use is X (previously Twitter), which is a microblogging platform. A paper looked especially at using X to foster foreign language learning @FFLL, aiming to gain insights about learners’ perceptions of the use of X in language learning and how they feel about tweeting as an extracurricular activity throughout four weeks. X helps educators and learners benefit because the platform enhances student collaboration and interaction. Students can engage in meaningful communication and get immediate feedback, which as discussed previously, can help students learn more effectively. 
+
+Vygotsky, a plurilingual speaker, underlined the importance of connection in people’s perception of events. He developed a social constructivist theory, where he believed community plays a central role in the process of 'making meaning' @VTCD. Education is not merely a cognitive basis for improvement, but also a socio-cultural activity. Learning takes place in a social context, where knowledge is acquired from interacting with each other and environments. Thus we introduce contextual variability, where cues such as mood, environment and mental images are encoded alongisde items as they are learned. This links back with our previous research where we discovered the importance of seeing new vocabuarly in different contexts and how the words can be used.
+
+Many of the language learning applications today are focused on beginners, whose aim is to just familiarise themselves with the language. This means there is more emphasis on creating content around general, surface-level topics. Basic vocabulary and grammar structures are not enough to make students confident in speaking, which we have discovered comes from being able to plan out sentences with careful vocabulary and grammar choices (which depends on having a more specific vocabulary range and an expansive grammar bank), as well as a fast, personalised feedback loop which does not come from traditional class lessons, as many students only see their teachers once a week. 
+
+The solution to this problem is thus a mobile app (due to the advantages of handheld devices for language learning) that will cater to intermediate learners by utilising social media's personalisation and community aspect to generate custom content to the user; techniques such as microlearning, spaced repetition, gamification, sensory learning methods, self-evaluation (to improve speaking); finally, flashcards that promote context-based learning and analogical thinking through the ability to add images and personal notes.
 
 #pagebreak()
+
 = Design
 
 To understand the language learning space, we must first identify the main pain points of learners and what is currently missing from the apps available. I sent out a survey using Qualtrics to language learners of Asian languages and teachers in this area. The survey assessed the most commonly used language apps currently and what features specifically users liked the most. I also wanted to identify how certain apps kept loyal users and contrast them to other language apps that people are not very consistent with. 
@@ -375,7 +336,7 @@ One method to achieve autonomy is by acknowledging a student's interests and bui
 
 Current language apps do touch upon these topics, however they provide very general vocabulary. The topic 'travel' is expansive and thus it is impossible for an app to devise a curricula that would be relatable for every language learner. Mentioned in my literature review section, cultivating stories that are personal to each person enables deeper thinking and memorisation. Therefore, learning words that have no personal value may seem 'irrelevant' and 'random', which are words used to describe the curriculum from my survey results.
 
-The question "What do you want to improve the most in?", also gave interesting results:
+The question 'What do you want to improve the most in?', also gave interesting results:
 
 #figure(
   image("documents/survey1/mainlanguagegoals.png", width:100%),
@@ -444,6 +405,57 @@ Overall, the survey has highlighted the importance of:
 5. Interaction with native speakers
 
 While my app currently may not be able to achieve (5), further implementation of my app could include using chat bots such as Bing Chat or Chat-GPT to role-play as a language buddy.
+
+#pagebreak()
+
+= Requirements specification
+
+So far, we have seen importance of personalized, relevant content, microlearning, spaced-repetition, multimedia learning through images, audio and animations, self-evaluation for speaking, and gamification. Gamification and relevant content have also been re-iterated through the initial surveys sent out to language learners and teachers. 
+
+One of the main issues of language learning is not being able to find appropriate content. Content in textbooks and apps today follow a particular school system, which contains some topics that may not be of interest to the user. Therefore, social media platforms can be leveraged to provide content that is more relevant to the user, due to their personalization algorithms. A popular social media video-sharing platform is YouTube, where users can find content that is more niche and specific to their interests.
+
+However, just obtaining transcripts from YouTube videos does not help with language learning. Users should be able to make flashcards out of certain sentences and words of interest to learn from. Flashcards should incorporate multimedia such as images, audio and animations to help a student's analogical thinking. The creation of these flashcards would then be re-surfaced to the user in a spaced repetition system, which studies have shown to be effective in long-term memory retention. Interactive learning, gamification and microlearning have also been proven to keep up engagement and motivation, as well as provide a sense of progression. Consequently, the app should incorporate short games with fun exercises to test the user's flashcards.
+
+Those who took the survey also mentioned the importance of a responsive UI that would correct users instantaneously. Games can help achieve this, with exercises including listening exercises that would enhance a user's understanding and speaking, as highlighted by the survey results. Self-evaluation techniques would be utilised in the speaking exercises, where users can record themselves speaking and the app would provide feedback on their pronunciation.
+
+Therefore, the functional requirements for the implementation is as follows:
+
+#table(
+  columns: (auto, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  [*Functional Requirement*], [*Features required*], [*Priority*],
+  text("As a user, I want to obtain transcripts from interesting videos to study from."),
+  list( 
+    [Connect to the YouTube application programming interface (API).],
+    [Transcribe the YouTube video.],
+    [Translate the selected YouTube video.]
+  ),
+  text("Should"),
+  text("As a user, I want to identify certain sentences and words to make flashcards from."),
+  list(
+    [Incorporate NLP models to do word segmentation on the transcript.],
+    [Create a database to store the user created flashcards.],
+  ),
+  text("Should"),
+  text("As a user, I want to be able to review the flashcards in a spaced repetition system."),
+  list(
+    [Create a spaced repetition system where the tested vocabulary gets surfaced to the user at optimal times.],
+    [Allow the user to create their flashcard on the app.],
+  ),
+  text("Could"),
+  text("As a user, I want to be able to improve listening and speaking skills."),
+  list(
+    [Games that allows users to listen to the sentence pronunciation to test listening skills.],
+    [Games that allows users to speak the sentence to test speaking skills.],
+  ), 
+  text("Could"),
+  text("As a user, I want to be engaged with the app and have fun while learning."),
+  list( 
+    [Incorporate progression aspects into the app, such as streaks.],
+  ),
+  text("Could"),
+)
 
 #pagebreak()
 = Implementation (Backend)
@@ -564,7 +576,7 @@ The algorithm spits out a new interval (the number of days for the next review),
 
 In this section we discuss the URL routes that the frontend application can query.
 
-=== Procesisng a video
+=== Processing a video
 
 The aim of this endpoint is to allow users to obtain the YouTube transcript from YouTube. This gets sent to a worker thread which will then do word processing, described in the next section.
 
@@ -719,15 +731,15 @@ The fields 'video_id', 'word_id' and 'line_changed' are required to uniquely ide
 
 An interesting aspect about Chinese is the fact there are no spaces between words. Word segmentation is thus difficult, as we cannot simply split sentences based on the whitespace character. Chinese characters additionally can have their own meaning by themselves, or be combined with other characters to form different words. 
 
-One example is given from an article on chinese word segmentation @chinesewordseg. The phrase: “你们研究所有十个图书馆” can have multiple meanings depending on which characters you combine. 
+One example is given from an article on chinese word segmentation @chinesewordseg. The phrase: '你们研究所有十个图书馆' can have multiple meanings depending on which characters you combine. 
 
 One interpretation is:
 
-你们(“you”)/研究(“to study”)/所有(“all”)/十(“ten”)/个( classifier)/图书馆(“library”), meaning "you go study all the 10 libraries!". 
+你们('you')/研究('to study')/所有('all')/十('ten')/个(classifier)/图书馆('library'), meaning 'you go study all the 10 libraries!'. 
 
 Another interpretation could be:
 
-你们(“you”)/研究所(“institute”)/有(“to have”)/十(“ten”)/个(classifier)/图书馆(“library”), meaning "your institute has 10 libraries!"
+你们('you')/研究所('institute')/有('to have')/十('ten')/个(classifier)/图书馆('library'), meaning 'your institute has 10 libraries!'
 
 Therefore, I decided to use a library for Chinese segmentation. In this process, I tried both Jieba and Stanza, however settled with Stanza due to the more advanced features Stanza offered, such as position of word (POS) tagging (categorizing a word as an adjective, adverb etc), lemmatization (finding the word's root), as well as segmentation.
 
@@ -755,7 +767,7 @@ Celery workers are also used for obtaining the keywords and their image urls fro
 
 Once both these steps are done, the data gets added to the VideoDetails table. Celery contains useful methods such as 'group' which allows tasks to be done in parallel, depending on the amount of worker threads are available. In my system, I have provided 2 threads; for the purposes of the minimal-viable-product (MVP), only one user can use the app at a time, so the maximum number of threads open at a time would be 2 (one for obtaining the keywords and their images, another for the stanza word processing).
 
-A 'chord' function, in-built in celery, is also used such that after these two tasks are done in parallel, the obtained data gets immediately added to the VideoDetails table.
+A chord function, in-built in celery, is also used such that after these two tasks are done in parallel, the obtained data gets immediately added to the VideoDetails table.
 
 Thus, the user can utilise the other features of the app as the video processing tasks run in the background.
 
@@ -862,7 +874,7 @@ To achieve context-based learning, obtaining YouTube videos for users to learn w
 
 Shadowing brings the benefits of bringing a learners' attention to the phonological aspects of what they hear, rather than the meanings, as there is very little time lag @shadowing. The same study showed that text-presented shadowing, where learners shadow together with a written script of a target passage, may improve reading skills and possibly pronunciation. 
 
-The disadvantage of shadowing is that a learner cannot hear themselves speak, as the attention is on listening to input and reproducing it orally. Thus, the paper emphasises the importance learners recording themselves for self-reflection. Finally, shadowing is the most effective when the content is learnt first.
+The disadvantage of shadowing is that a learner cannot hear themselves speak, as the attention is on listening to input and reproducing it orally. Thus, the paper emphasises the importance learners recording themselves for self-reflection, re-iterating what we have seen in the context survey.
 
 Thus, providing YouTube transcripts that sync with the videos allow learners to practice shadowing. Users should be able to search for videos and save videos so that the learner can re-visit the same video. Later on, we also touch upon self-reflection through recording the user's voice in the provided games.
 

@@ -3,6 +3,7 @@
 #let small-size = 9.24994pt
 #let normal-size = 10.00002pt
 #let large-size = 11.74988pt
+#let huge-size = 14.3999pt
 
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the American Mathematical Society.
@@ -98,16 +99,17 @@
   show heading: it => {
     // Create the heading numbering.
     let number = if it.numbering != none {
+      set text(size: huge-size, weight: 700)
       counter(heading).display(it.numbering)
       h(7pt, weak: true)
     }
 
     // Level 1 headings are centered and smallcaps.
     // The other ones are run-in.
-    set text(size: normal-size, weight: 400)
+    //set text(size: huge-size, weight: 700)
     if it.level == 1 {
       set align(center)
-      set text(size: normal-size)
+      set text(size: huge-size, weight: 700)
       smallcaps[
         #v(15pt, weak: true)
         #number
@@ -116,6 +118,7 @@
       ]
       counter(figure.where(kind: "theorem")).update(0)
     } else {
+      set text(size: large-size, weight: 700)
       v(11pt, weak: true)
       number
       let styled = if it.level == 2 { strong } else { emph }
