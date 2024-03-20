@@ -122,7 +122,7 @@ I will ensure that:
 + My app will not allow videos to be downloaded or be temporarily stored. The video will be transformed into transcripts designed just for language learning.
 + My app will only use publicly available content through the YouTube API.
 
-This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, shown in the Appendix (@PI), which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
+This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
 
 The signed ethical approval document can also be seen in the Appendix (@ethicsapproval).
 
@@ -1436,15 +1436,6 @@ flutter run
     Progress log
   ],
 )<progress>
-
-#figure(
-  (image("documents/swe/PI1.png",width:120%), 
-  image("documents/swe/PI2.png",width:120%),
-  image("documents/swe/PI3.png",width:120%)).join(),
-  caption: [
-    Participant Information for surveys
-  ],
-)<PI>
 
 #figure( 
   image("documents/swe/ethicsapproval.png", width: 120%),
