@@ -3,10 +3,21 @@
 )
 
 #import "template.typ": *
+
 #show: ams-article.with(
   title: [],
   bibliography-file: "refs.bib",
 )
+
+#let formatText = (header) => {
+  set align(center)
+  set text(size: huge-size, weight: 700)
+  smallcaps[
+    #v(15pt, weak: true)
+    #header
+    #v(normal-size, weak: true)
+  ]
+}
 
 #import "@preview/wordometer:0.1.1": word-count, total-words
 #show: word-count
@@ -40,14 +51,14 @@ University of St Andrews
 #pagebreak()
 
 #set align(center + horizon)
-= Dedication 
+
+#formatText("Dedication")
 To my grandma, mum and dad.
 
 #set align(left + horizon)
 #pagebreak()
 
-= Abstract
-
+#formatText("Abstract")
 This project presents the design, development and evaluation of a full-stack language application curated for intermediate Chinese learners. 
 
 Research was conducted through surveys and interviews with language learners and teachers to identify the most important aspects of language learning. The final result contains an app that uses natural language processing to segment video transcripts from YouTube into vocabulary words for students to study. Students are able to watch YouTube videos in real-time with the transcripts and their translations, create multimedia flashcards enhanced with images from Google, personal notes, audio pronunciations and stroke order animations, and play short, 5-minute games to re-inforce learning based on a spaced-repetition algorithm. These games include exercises such as matching words to images, testing speech pronunciation, translating sentences, fill-in-the-blank sentences and stroke order practice.
@@ -56,8 +67,7 @@ Lastly, the app was evaluated by 37 students which indicated that the app was en
 
 #pagebreak()
 
-= Declaration
-
+#formatText("Declaration")
 I declare that the material submitted for assessment is
 my own work except where credit is explicitly given to
 others by citation or acknowledgement. This work was
@@ -72,10 +82,7 @@ retain the copyright in this work.
 
 #set align(left + top)
 
-= Contents
-
 #outline(
-  title: none,
   indent: auto,
 )
 
@@ -110,27 +117,11 @@ The objectives of this project are stated as follows:
 
 #pagebreak()
 
-= Ethics
-
-Regarding YouTube’s developer policies @youtubepolicies it is important to consider both ethical and legal aspects, including copyright issues.
-I will ensure that:
-+ Content queried from YouTube is used only for language learning purposes, and the app will not misuse the content in any way.
-+ Content queried from YouTube will be explicitly stated, as the video will be embedded into the app.
-+ To protect the rights of content creators, the app will clearly credit the original creators of the video.
-+ Videos will stop being shown if a content creator does not want their video shown on the app.
-+ My app will transform the copyrighted material by incorporating it into a language learning context.
-+ My app will not allow videos to be downloaded or be temporarily stored. The video will be transformed into transcripts designed just for language learning.
-+ My app will only use publicly available content through the YouTube API.
-
-This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
-
-The signed ethical approval document can also be seen in the Appendix (@ethicsapproval).
-
-#pagebreak()
-
 = Software engineering process
 
-Agile is a methodology for the continuous delivery of valuable software. As the end-goal is to create a full-stack application with iterative feedback from interviews throughout the building process, Agile is useful for producing many working iterations of a software solution quickly and also involving a wide range of stakeholders at all phases of the development process @ieeeagile.
+For this project, Agile was used as the software engineering methodology.
+
+Agile allows for the continuous delivery of valuable software. As the end-goal is to create a full-stack application with iterative feedback from interviews throughout the building process, Agile is useful for producing many working iterations of a software solution quickly and also involving a wide range of stakeholders at all phases of the development process @ieeeagile.
 
 This means that on an ongoing basis, a product can be tested, examined and adjusted, rather than building a single product at the very end. Agile consists of the following practices (some were removed as it presumed the existence of teams instead of a solo project) @ieeepaper:
 
@@ -158,20 +149,41 @@ Finally, (6) is will be achieved through a progress log on Notion that will trac
   ],
 )<projectplan>
 
-The initial project plan seen in a GANTT chart (see @projectplan). As shown, there is a lot of lee-way to allow for project flexibility. This is because the app is planned to evolve depending on user feedback during the building process. As you will find discussed below in the design and implementation sections, the project has diverted from the initial plan and has extended to contain many more features than what was initially expected. 
+The initial project plan seen in a GANTT chart (see @projectplan). As shown, there is a lot of leeway to allow for project flexibility. This is because the app is planned to evolve depending on user feedback during the building process. As you will find discussed below in the design and implementation sections, the project has diverted from the initial plan and has extended to contain many more features than what was initially expected. 
 
 The reason why weeks 1-8 were blank were because these weeks were used to understand the problem space and get familiar with Flask and Flutter. 
 
 You can read the progress log in Appendix @progress. 
 
 #pagebreak()
+
+= Ethics
+
+Since this project involves the use of YouTube content it is important to be aware of YouTube's developer policies.
+
+Regarding YouTube’s developer policies @youtubepolicies it is important to consider both ethical and legal aspects, including copyright issues.
+I will ensure that:
++ Content queried from YouTube is used only for language learning purposes, and the app will not misuse the content in any way.
++ Content queried from YouTube will be explicitly stated, as the video will be embedded into the app.
++ To protect the rights of content creators, the app will clearly credit the original creators of the video.
++ Videos will stop being shown if a content creator does not want their video shown on the app.
++ My app will transform the copyrighted material by incorporating it into a language learning context.
++ My app will not allow videos to be downloaded or be temporarily stored. The video will be transformed into transcripts designed just for language learning.
++ My app will only use publicly available content through the YouTube API.
+
+This project will also require surveys and interviews from participants. Surveys will be conducted on Qualtrics and only accessible to students within the University of St Andrews. Every participant involved will be given a consent form to fill out as well as a Participant Information sheet, which will describe how their data will be used and for what purposes. This data will be anonymised and deleted after the project submission date.
+
+The signed ethical approval document can also be seen in the Appendix (@ethicsapproval).
+
+#pagebreak()
+
 = Context survey
 
 It has been argued that languages did not necessarily evolve from speech, but from the innate human instinct of communication. At first, humans did not have words, but they expressed themselves with body gestures and hand movements. As they innovated, creating fire and inventing tools, only then did they begin to communicate with their mouths, and thus along came the need for words @OEL. Language therefore emerged from mimicking others, which we can see from studying the brains of monkeys; the same areas of their brains light up when watching another monkey perform a set of grasping movements @MMN. Interestingly, the brain region for monkeys mimicking each other is the same brain region that lights up for human language. 
 
 What we can distil from this research is that we learn languages from copying and observing each other. By just observing another’s movements, our own brain can help us infer their goals and intentions. This therefore gives us meaning behind their movements. If we relate this to language, by listening to a lot of content in that language and watching their body movements, we can unconsciously infer the meaning of the words. 
 
-A video on language learning @HTL utilises this to summarize Language learning into four principles:
+A video summarizes language learning into four principles @HTL:
 
 1. Seek relevance
 2. Obtain the content’s basic meaning
@@ -201,9 +213,11 @@ The third is using comprehensible input, relating to principle (1) (seeking rele
 
 Fourth, is output. Outputting is important because this is where we use the new words in different contexts. We can start to use the words in sentences that have a personal relation to us, reinforcing the words in our minds. Playing with the words in our minds also lets us deepen connections with words in that context, helping us draw links between words and start speaking fluently. 
 
+== Analogical thinking
+
 To further investigate the importance of creating analogies in our brain, a study @APHT explored how analogical processes in human thinking and learning improved a person’s learning relational retrieval and transfer. 
 
-The paper focuses on mapping. Simplified, two situations or concepts are aligned to find commonalities and make inferences between them @MOAL. This theory was previously studied in a paper published in 1890 @TCM, which aimed to create a Structure-Mapping Engine (SME), a cognitive simulation for analogical matching. There are two important aspects; support, which measures how much an inference is based on the analogy you are making (where more support from the analogy is better) and extrapolation, measuring how much your inferences goes beyond what the analogy directly provides.
+The paper focuses on mapping. In simplified terms, two situations or concepts are aligned to find commonalities and make inferences between them @MOAL. This theory was previously studied in a paper published in 1890 @TCM, which aimed to create a Structure-Mapping Engine (SME), a cognitive simulation for analogical matching. There are two important aspects; support, which measures how much an inference is based on the analogy you are making (where more support from the analogy is better) and extrapolation, measuring how much your inferences goes beyond what the analogy directly provides.
 
 Only after mapping does ‘directionality’ emerge, where the meat of the understanding takes place as we explore the analogy further. An example given from paper @MOAL is the word 'jail'. A similar word could be 'prison'. An analogy could be 'job'. Thus, if the learner was learning 'jail', instead of just showing them the word countless times, we can ask them to generate metaphors with the word and talk about their experiences or feelings with that word. 
 
@@ -211,13 +225,27 @@ A paper on structural alignment @SAIC takes this further, exploring why analogie
 
 Intermediate learners can benefit from analogical thinking, because they have a larger vocabulary range and a better understanding of grammar, enabling them to draw better connections. A current issue intermediate learners face is the lack of speaking and listening practice students get in a classroom setting @PIL. However, it is through listening where learners can create analogies as they see the words in more contexts, and it is through speaking where learners can develop their own self-confidence in that language. The self-confidence ties in with pronunciation, as students are worried that they sound too foreign. 
 
+== Context based learning and self-evaluation
+
 The most common methods of language learning taught in schools are usually through reading. To investigate the effectiveness of reading in the target language, I explored a paper on the effect of exposure frequency on vocabulary acquisition @EEF. The research confirms that reading does serve as a significant source of vocabulary development, but in quite a surprising manner. Although the vocabulary growth is modest, it highlights that reading creates cumulative knowledge, and has a long-term positive impact on adult vocabulary growth. What is paramount is the exposure of the new word in different contexts, which allows the learners to infer word meanings. We can link this back to the idea of how our brains remember better if they work through finding patterns themselves, which is why learning languages through pure translating back to your native language is not the most effective.
 
 If reading only contributes to a modest impact on vocabulary, what are some of the strategies that have been proven effective for vocabulary retention? As already discussed, learning vocabulary is enhanced when we encounter words in context. Flashcards, mnemonics and translations are very common approaches for this, but to prove this assumption, we should assess vocabulary learning through immersion. VocabulARy, a study on learning vocabulary through augmented reality (AR) @AR, is an AR application for vocabulary learning that visually annotates objects in AR, in the user’s surroundings, with the corresponding words. The study took two groups, one that used the VocabulARy prototype and another that had an alternate AR system which did not show any additional visualisation of the keyword. Showing visualisations outperformed the other group in short-term retention, mental effort and task-completion time, and also scored significantly higher in delayed recall and learning efficiency.
 
-How can we apply what we have learnt with speaking? As previously discovered, speaking is the biggest priority for intermediate learners. 
+Vygotsky, a plurilingual speaker, emphasises the importance of learning in social contexts, where knowledge is acquired from interacting with each other and environments @VTCD. Through this, he developed a social constructivist theory, where he believed community plays a central role in the process of 'making meaning'. This links back with our previous research where we discovered the importance of comprehensible input and using context clues to learn new vocabulary. Furthermore, utilising the community aspect of language learning enables constant assessment of a one's own performance. A community can help with self-evaluation, where learners can ask for feedback on their pronunciation, grammar and vocabulary. 
 
-Speaking is known for its difficulty due to message conceptualization and articulation @ISS. They studied the strategies students took when practising speaking. Participants used extensive planning to structure their arguments and to select appropriate vocabulary, then continuously monitored their performance by assessing their grammar, vocabulary and pronunciation. After, they completed self-evaluation. What we can gauge is that a good speaker actually comes from the planning and thought behind their sentences and arguments, rather than just constantly outputting speech. Bound with this, is the constant assessment of their own performance.
+Interestingly, the advantages of self-evaluation can especially be seen with speaking. Speaking is an important aspect of language learning where learners focus on outputting different words in different contexts.
+
+Speaking is known for its difficulty due to message conceptualization and articulation @ISS. In this paper, they studied the strategies students took when practising speaking. Participants used extensive planning to structure their arguments and to select appropriate vocabulary, then continuously monitored their performance by assessing their grammar, vocabulary and pronunciation. After, they completed self-evaluation. What we can gauge is that a good speaker actually comes from the planning and thought behind their sentences and arguments, rather than just constantly outputting speech. Bound with this, is the constant assessment of their own performance.
+
+Therefore, having the ability to evaluate and assess one’s own performance is crucial in language learning, as it helps a learner self-correct and identify their own mistakes.
+
+== Mobile learning
+
+Many language resources today are available through mobile apps. In language learning, mobile devices are great for quickly looking up new words, translating sentences or even finding answers to questions. It also provides a convenient means to access videos, music and content that can be applicable to language learning. With the billions of content available online, learners can also be exposed to different cultures and languages whenever they want. In learning, there is a ‘forgetting curve’ @FC which states that the process of forgetting gets slower and slower over time, as long as you keep repeating the content at timed intervals. Thus, having access to content anytime means that learners can harness the power of repetition and utilise it to their advantage. This is in contrast to the learning environment in schools, where students have to wait each week for a lesson to review their knowledge. 
+
+A case study we can use is X (previously Twitter), which is a microblogging platform. A paper looked especially at using X to foster foreign language learning @FFLL, aiming to gain insights about learners’ perceptions of the use of X in language learning and how they feel about tweeting as an extracurricular activity throughout four weeks. X helps educators and learners benefit because the platform enhances student collaboration and interaction. Students can engage in meaningful communication and get immediate feedback, which as discussed previously, can help students learn more effectively. 
+
+== The current language apps
 
 With this in mind, we can assess the current language learning apps on the market. In particular, I will be discussing the big three language learning apps, Babbel, Duolingo and Rosetta Stone.
 
@@ -237,7 +265,13 @@ Each language app has their own unique advantages and disadvantages. The use of 
 
 Duolingo’s strength comes with the gamification aspect. Its bite-sized lessons take less than 5 minutes to do, and learners can undergo 'quests' with their friends, allowing them to push each other and support each other in learning. It also makes them feel more accountable when they miss their lessons, because their progress can be shown to their friends. As a personal user of Duolingo, I like how each exercise brings in new vocab to learn, but at the same time is very easy to complete. Furthermore, Duolingo consists of badge systems and rewards, in the hopes that students become more motivated and engaged in their content. Students should be intrinsically motivated to learn @IOG (where the desire to learn comes from the student, rather than from external factors such as parental pressure), as this leads to better information retainment. However, a substantial body of research suggests that the way we attempt to increase intrinsic motivation should be cautioned @EOG, because tangible rewards (such as badges) can shift a student’s motivation from intrinsic to extrinsic. What they instead conclude is that gamification should be used for the fast feedback to the students. 
 
+Duolingo is also famous for its microlearning aspect. Microlearning is similar to gamification, but the critical difference lies with learning goals being masked as game-like activities. The gamification encourages students to participate more in the learning activities by providing them more enjoyable approaches. Duolingo is one of the most popular language apps, but how effective is it? We can back up Duolingo through a study done by Fang @ASCE , which looks at English learning. The study begins with emphasising that despite the exponential growth of knowledge and information with the internet, the traditional 'classroom + textbook' learning mode has failed to satisfy people’s needs of seeking knowledge. The new micro-learning approach has become popular among college students due to their ability to use mobile handheld devices, such as a mobile phone, and micro-learning concentrates on brief and independent messages. College students are therefore provided with the information they need anytime.
+
+A paper on microlearning @MLT shows that gamification, infographics, videos, apps and social media may all be leveraged to provide this. Microlearning allows lessons to be given in a short length of time and can be accessible at any time and from anywhere. It further explores how microlearning can increase student comprehension and retention, especially when lessons are broken down into digestible pieces. In the modern day, TikTok (a platform for short videos) are extremely easy to remember because of their short, effective nature, where all important information is concisely condensed into a few seconds. This is a great example of microlearning; the only downside is that microlearning is not effective when dealing with a narrow, intricate and complicated issue requiring an in-depth discussion. 
+
 Rosetta Stone’s strength comes from the fact it uses sensory input. Different languages may contain words that do not exist in the learner’s primary language. Thus, there is no direct translation. Therefore, images are incredibly useful for this, because it strips away the intermediary step of having your brain translate to a different language domain, where sometimes the word does not exist. Its stress on pronunciation and having a direct feedback loop is also useful in achieving fluency, because many learners struggle with pronunciation the most. Learning new languages requires you to train new mouth muscles, muscles that may not be used in the learner’s primary language.
+
+== Utilising social media
 
 When designing a language app, we can also stretch beyond what other language apps do and take a look at social media. Social media is addictive; among the 7.91 billion people as of 2022, the average time individuals spent using the internet was 6h 58 minutes per day, with an average use of social media platforms of 2h and 27 mins @GOR. What sets social media apart is the personalization aspect, human connection and the fact people are free to exchange ideas which build up on top of each other. We can see this through the most popular apps of January 2022, which are TikTok, Instagram, Facebook and Whatsapp, whose basic goal is to enable users to share and create content with each other. 
 
@@ -247,15 +281,7 @@ Drawing aspects of social media with language learning is an interesting field t
 
 However, I would criticise this paper in that this paper was written through the lens of an academic context. There are many goals within the field of language learning; not everyone learns for the sake of academic writing. Social media’s strength lies in getting quick ideas across and sparking conversation. Social media’s personalisation aspect also means learners can choose what and who they want to learn from; there is plentiful content for those in the academic space, and others in entertainment.
 
-Another paper focuses on microlearning and shows that gamification, infographics, videos, apps and social media may all be leveraged to provide this @MLT. Microlearning allows lessons to be given in a short length of time and can be accessible at any time and from anywhere. It further explores how microlearning can increase student comprehension and retention, especially when lessons are broken down into digestible pieces. In the modern day, TikTok (a platform for short videos) are extremely easy to remember because of their short, effective nature, where all important information is concisely condensed into a few seconds. This is a great example of microlearning; the only downside is that microlearning is not effective when dealing with a narrow, intricate and complicated issue requiring an in-depth discussion. 
-
-An example of microlearning is Duolingo. Microlearning is often known as gamification, where the critical difference lies with learning goals being masked as game-like activities. The gamification encourages students to participate more in the learning activities by providing them more enjoyable approaches. Duolingo is one of the most popular language apps, but how effective is it? We can back up Duolingo through a study done by Fang @ASCE , which looks at English learning. The study begins with emphasising that despite the exponential growth of knowledge and information with the internet, the traditional 'classroom + textbook' learning mode has failed to satisfy people’s needs of seeking knowledge. The new micro-learning approach has become popular among college students due to their ability to use mobile handheld devices, such as a mobile phone, and micro-learning concentrates on brief and independent messages. College students are therefore provided with the information they need anytime.
-
-Using handheld devices also has its benefits. In language learning, mobile devices are great for quickly looking up new words, translating sentences or even finding answers to questions. It also provides a convenient means to access videos, music and content that can be applicable to language learning. With the billions of content available online, learners can also be exposed to different cultures and languages whenever they want. In learning, there is a ‘forgetting curve’ @FC which states that the process of forgetting gets slower and slower over time, as long as you keep repeating the content at timed intervals. Thus, having access to content anytime means that learners can harness the power of repetition and utilise it to their advantage. This is in contrast to the learning environment in schools, where students have to wait each week for a lesson to review their knowledge. 
-
-A case study we can use is X (previously Twitter), which is a microblogging platform. A paper looked especially at using X to foster foreign language learning @FFLL, aiming to gain insights about learners’ perceptions of the use of X in language learning and how they feel about tweeting as an extracurricular activity throughout four weeks. X helps educators and learners benefit because the platform enhances student collaboration and interaction. Students can engage in meaningful communication and get immediate feedback, which as discussed previously, can help students learn more effectively. 
-
-Vygotsky, a plurilingual speaker, underlined the importance of connection in people’s perception of events. He developed a social constructivist theory, where he believed community plays a central role in the process of 'making meaning' @VTCD. Learning takes place in a social context, where knowledge is acquired from interacting with each other and environments. This links back with our previous research where we discovered the importance of seeing new vocabuarly in different contexts and how the words can be used.
+== Summary
 
 Many of the language learning applications today are focused on beginners, whose aim is to just familiarise themselves with the language. This means there is more emphasis on creating content around general, surface-level topics. Basic vocabulary and grammar structures are not enough to make students confident in a language. Improvement comes from constant self-evaluation and having an expansive vocabulary range and grammar bank, as well as a fast, personalised feedback loop which does not come from traditional class lessons, as many students only see their teachers once a week. 
 
@@ -265,7 +291,9 @@ The solution to this problem is thus a mobile app (due to the advantages of hand
 
 = Design
 
-To understand the language learning space, we must first identify the main pain points of learners and what is currently missing from the apps available. I sent out a survey using Qualtrics to language learners of Asian languages and teachers in this area. The survey assessed the most commonly used language apps currently and what features specifically users liked the most. I also wanted to identify how certain apps kept loyal users and contrast them to other language apps that people are not very consistent with. 
+To understand the language learning space, we must first identify the main pain points of learners and what is currently missing from the apps available. 
+
+I sent out a survey using Qualtrics to language learners of Asian languages and teachers in this area. The survey assessed the most commonly used language apps currently and what features specifically users liked the most. I also wanted to identify how certain apps kept loyal users and contrast them to other language apps that people are not very consistent with. 
 
 However, these questions gives a false sense that creating language apps is the only solution to learning a language. In fact there are many other resources available, such as using textbooks, attending in-person classes and more. Thus, the questions in the survey were not just limited to apps, but also learning methods students liked to use and why.
 
@@ -456,7 +484,7 @@ Therefore, the functional requirements for the implementation is as follows:
 #pagebreak()
 = Implementation (Backend)
 
-Flask, a lightweight Python-based microframework, was chosen due to its simplicity and flexbility, its active community and updated documentation. Flask also utilises Python, which contains many useful libraries for word segmentation and other natural language processing (NLP) tasks.
+Flask, a lightweight Python-based microframework, was chosen for the backend implementation due to its simplicity and flexbility, its active community and updated documentation. Flask also utilises Python, which contains many useful libraries for word segmentation and other natural language processing (NLP) tasks.
 
 @dbschema is a UML diagram displaying the relationships between my Flask models. SQL database was used because SQL can be accessed with Flask through SQLAlchemy, a Python SQL toolkit and object relational mapper (ORM). Flask-SQLAlchemy provides ways to interact with and gain access to the database's SQL functionalities @sqlalchemy. The ORM aspect allows for easy querying by using simple Python objects and methods rather than writing SQL statements.
 
@@ -725,6 +753,8 @@ The fields 'video_id', 'word_id' and 'line_changed' are required to uniquely ide
 
 == Worker threads
 
+The worker threads are in charge of processing the video transcripts.
+
 An interesting aspect about Chinese is the fact there are no spaces between words. Word segmentation is thus difficult, as we cannot simply split sentences based on the whitespace character. Chinese characters additionally can have their own meaning by themselves, or be combined with other characters to form different words. 
 
 One example is given from an article on chinese word segmentation @chinesewordseg. The phrase: '你们研究所有十个图书馆' can have multiple meanings depending on which characters you combine. 
@@ -789,9 +819,7 @@ Finally, this backend must be hosted such that any frontend client can access th
 
 == Flutter
 
-The decision to create a mobile app over a web application was chosen because of its accessibility. Although the backend will be hosted online (on a virtual machine supplied by the University), certain data will be cached locally on the mobile device itself. Whereas, a website requires constant WiFi connection and inhibits practicing a language on the go.
-
-Due to the portable nature of mobile phones, students can draw better connections; with the case of learning the word 'coffee' in a coffee shop, having a mobile app readily available at any location is very beneficial, helping to provide a deeper and more authentic learning experience @MALL.
+The decision to create a mobile app over a web application was chosen because of its accessibility. Although the backend will be hosted online (on a virtual machine supplied by the University), certain data will be cached locally on the mobile device itself. Whereas, a website requires constant WiFi connection and inhibits practicing a language on the go. Adding on to the advantages of mobile apps explored in the context survey, mobile phones can help students draw better connections between vocabulary due to their portable nature. With the case of learning the word 'coffee' in a coffee shop, having a mobile app readily available at any location is very beneficial, helping to provide a deeper and more authentic learning experience @MALL.
 
 In another case, Lu and her colleagues (2014) designed a mobile app @TAT presenting Chinese characters along with pinyin (chinese pronunciation) and illustrations on the stroke order in writing Chinese characters. Additionally, games such as 'Pinyin Match' and 'Hearing and Match' were implemented, with gamification elements such as levelling up and competition. The final results showed that students positively engaged with the mobile app to practice and learn Chinese characters. Teachers also reported that the mobile app accommodated a variety of students' learning abilities. 
 
@@ -799,7 +827,7 @@ After the study, further recommendations for the app were recorded, such as prov
 
 These recommendations are interesting as it relates to the teachers' results from the initial survey conducted. Teachers thought that modern language apps today lacked the ability for students to self-correct which could be helped by providing animated hints on stroke order and instant feedback from games.
 
-The same paper also mentioned that mobile apps enhanced students' learning in and outside the classroom, as mobile apps provided opportunities for learners to practice the language outside the classroom. One example is when students were tasked to take appropriate photos to interpret certain idioms - these students then reported that it enhanced their understanding of these Chinese idioms.
+The same paper also mentioned that mobile apps provided opportunities for learners to practice the language outside the classroom. One example is when students were tasked to take appropriate photos to interpret certain idioms - these students then reported that it enhanced their understanding of these Chinese idioms.
 
 Through the initial surveys, the idea of gamification was stressed and thus my initial intention was to use Unity. Unity is a cross-platform game engine since 2005, and is popular with many mobile game app developers. Ideas of creating in game characters that the app user could talk to were proposed through utilising Large Language Models (LLM) models, however this idea was pushed to the backlog due to not being able to test the LLM's accuracy. A user may pick up something wrong from the LLM, which is detrimental to the user's learning. Instead, the learning in the app should be similar to Anki, where there is a set answer to check with. The learning overhead for Unity was very big. Not only did art need to be involved (you create your own models to put into your game), it is also not a very friendly platform for customizability, for example adding extra packages that is beneficial to my language app.
 

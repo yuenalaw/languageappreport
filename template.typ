@@ -5,6 +5,7 @@
 #let large-size = 11.74988pt
 #let huge-size = 14.3999pt
 
+
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the American Mathematical Society.
 #let ams-article(
