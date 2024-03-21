@@ -1452,6 +1452,7 @@ To download the Flutter client when the repository is accessed, run the followin
 
 ```
 cd frontend/workspace/flutterapp
+flutter build apk
 flutter pub get 
 flutter run
 ```
